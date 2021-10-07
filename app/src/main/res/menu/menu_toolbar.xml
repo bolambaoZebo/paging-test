@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    >
+    <item
+        android:id="@+id/sorting"
+        android:icon="@drawable/ic_sort"
+        android:title="Sort"
+        app:showAsAction="always"
+        >
+        <menu>
+
+            <item
+                android:id="@+id/premier"
+                android:title="@string/premier_league" />
+
+            <item
+                android:id="@+id/uefa"
+                android:title="@string/uefa_champions_league" />
+
+            <item
+                android:id="@+id/europa"
+                android:title="@string/europa_league" />
+
+            <item
+                android:id="@+id/laliga"
+                android:title="@string/la_liga" />
+
+            <item
+                android:id="@+id/series"
+                android:title="@string/serie_a" />
+
+            <item
+                android:id="@+id/bundesliga"
+                android:title="@string/bundesliga" />
+
+            <item
+                android:id="@+id/frenchligue"
+                android:title="@string/french_ligue" />
+
+            <item
+                android:id="@+id/other"
+                android:title="@string/other" />
+
+        </menu>
+
+    </item>
+
+        <item
+            android:id="@+id/language_icon"
+            android:icon="@drawable/ic_baseline_language_24"
+            android:title="Sort"
+            app:showAsAction="always">
+
+            <menu>
+
+                <item
+                    android:id="@+id/action_english"
+                    android:title="@string/english" />
+
+                <item
+                    android:id="@+id/action_chinese"
+                    android:title="@string/chinese" />
+
+            </menu>
+
+        </item>
+
+
+</menu>
+
+
+<!--<item-->
+<!--android:id="@+id/action_search"-->
+<!--android:icon="@drawable/ic_search"-->
+<!--android:title="Search"-->
+<!--app:actionViewClass="androidx.appcompat.widget.SearchView"-->
+<!--app:showAsAction="always|collapseActionView" />-->

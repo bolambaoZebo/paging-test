@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp"
+    >
+
+    <ImageView
+        android:id="@+id/bookmark_item_image"
+        android:layout_width="130dp"
+        android:layout_height="80dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/banner_one" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="8dp"
+        android:layout_toEndOf="@+id/bookmark_item_image"
+        android:orientation="vertical"
+        android:padding="2dp"
+        >
+
+        <TextView
+            android:id="@+id/bookmark_item_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            tools:text="Example item" />
+
+        <TextView
+            android:id="@+id/bookmark_item_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            tools:text="@string/hide_bottom_view_on_scroll_behavior" />
+
+    </LinearLayout>
+
+</RelativeLayout>

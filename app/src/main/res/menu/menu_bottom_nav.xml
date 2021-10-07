@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/homeFragment"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:menuCategory="secondary"
+        android:title="@string/title_breaking_news" />
+
+    <item
+        android:id="@+id/galleryFragment"
+        android:icon="@drawable/ic_baseline_highlight_24"
+        android:menuCategory="secondary"
+        android:title="@string/title_search_news" />
+
+    <item
+        android:id="@+id/bookmarkFragment"
+        android:icon="@drawable/ic_bookmarks"
+        android:menuCategory="secondary"
+        android:title="@string/title_bookmarks" />
+
+</menu>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">微博体育</string>
+    <string name="title_breaking_news">" 家"</string>
+    <string name="title_search_news">强调</string>
+    <string name="title_bookmarks">书签</string>
+    <string name="no_bookmarks">" 没有书签"</string>
+    <string name="no_results_found">未找到结果</string>
+    <string name="delete_all_bookmarks">删除所有书签</string>
+    <string name="chinese">中国人</string>
+    <string name="english">"英语 "</string>
+    <string name="premier_league">英超</string>
+    <string name="uefa_champions_league">欧冠</string>
+    <string name="europa_league">欧联</string>
+    <string name="la_liga">西甲</string>
+    <string name="serie_a">意甲</string>
+    <string name="bundesliga">德甲</string>
+    <string name="french_ligue">法甲</string>
+    <string name="other">其他</string>
+    <string name="save_post_tab">保存帖子</string>
+    <string name="save_highlights">" 保存亮点"</string>
+    <string name="search_instructions" translatable="false">" 点击放大镜开始搜索"</string>
+    <string name="retry">" 重试"</string>
+    <string name="refresh">" 刷新"</string>
+    <string name="could_not_refresh">无法刷新：%s</string>
+    <string name="could_not_load_search_results">" 无法加载搜索结果：%s"</string>
+    <string name="unknown_error_occurred">" 出现未知错误"</string>
+    <string name="instructions">注意：您可以通过单击列表中的保存帖子和保存突出显示在此处保存突出显示和位置</string>
+    <string name="save_post">保存帖子</string>
+</resources>
