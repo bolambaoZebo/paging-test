@@ -2,16 +2,25 @@ package com.example.secondhiltapp.db
 
 import androidx.room.*
 import com.example.secondhiltapp.db.entity.BookMarkData
+import com.example.secondhiltapp.preferences.SortOrder
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface BookmarkDao {
 
+    fun getBookmarks(query: String, sortOrder: SortOrder, hideCompleted: Boolean): Flow<List<BookMarkData>> =
+        when (sortOrder) {
+            SortOrder.BY_DATE -> getAllBookmark()//getTasksSortedByDateCreated(query, hideCompleted)
+            SortOrder.BY_NAME -> getAllBookmark()//getTasksSortedByName(query, hideCompleted)
+        }
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun savaBookmark(soccerNews: List<BookMarkData>)
 
     @Query("DELETE FROM bookmark")
     suspend fun deleteAllBookmark()
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(bookMarkData: BookMarkData)
 
     @Query("SELECT * FROM bookmark")
     fun getAllBookmark() : Flow<List<BookMarkData>>

@@ -102,6 +102,9 @@ dependencies {
     implementation "androidx.room:room-ktx:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
 
+    def dataStoreVersion = "1.0.0-alpha02"
+    // DataStore
+    implementation "androidx.datastore:datastore-preferences:$dataStoreVersion"
 
 }
 kapt {

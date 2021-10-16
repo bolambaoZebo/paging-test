@@ -3,6 +3,7 @@ package com.example.secondhiltapp.db.entity
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.example.secondhiltapp.preferences.BOOKMARKTYPE
 import kotlinx.android.parcel.Parcelize
 import java.text.DateFormat
 
@@ -23,7 +24,7 @@ data class BookMarkData(
     var descriptionChinese: String? = null,
     var created: Long = System.currentTimeMillis(),
     var isHidden: Boolean = true,
-    var type: String? = null //news or highlights
+    var type: BOOKMARKTYPE? = null //news or highlights
 ) : Parcelable {
 
     @PrimaryKey(autoGenerate = true)

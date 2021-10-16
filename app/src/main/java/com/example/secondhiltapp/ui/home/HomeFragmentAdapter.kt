@@ -10,7 +10,8 @@ import com.example.secondhiltapp.databinding.ItemSoccerNewsBinding
 import com.example.secondhiltapp.db.entity.SoccerNews
 
 class HomeFragmentAdapter(
-    private val context: Context
+    private val context: Context,
+    private val listener: OnClickListeners
 ) : RecyclerView.Adapter<HomeFragmentAdapter.HomeViewHolder>() {
 
     private var oldData = emptyList<SoccerNews>()
@@ -30,6 +31,10 @@ class HomeFragmentAdapter(
                     binding.itemHorseNewsTitle.text = data.titleChinese
                     binding.itemHorsNewsDescription.text = data.descriptionChinese
                     Glide.with(context).load(data.imageUrl).into(binding.itemHorseNewsImage)
+                }
+
+                savePost.setOnClickListener {
+                    listener.onSaveClick(data)
                 }
             }
         }
@@ -58,5 +63,9 @@ class HomeFragmentAdapter(
     fun setHomeData(newData: List<SoccerNews>){
         oldData = newData
         notifyDataSetChanged()
+    }
+
+    interface OnClickListeners {
+        fun onSaveClick(data: SoccerNews)
     }
 }
