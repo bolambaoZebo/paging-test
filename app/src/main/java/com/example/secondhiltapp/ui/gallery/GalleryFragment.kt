@@ -78,7 +78,7 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery), SoccerVideoAdapter.
         setHasOptionsMenu(true)
     }
     override fun onItemClicked(video: SoccerVideos) {
-        val action = GalleryFragmentDirections.actionGalleryFragmentToDetailsFragment(video)
+        val action = GalleryFragmentDirections.actionGalleryFragmentToDetailsFragment(video.video!!)
         viewModel.isActive?.observe(viewLifecycleOwner){
             if (it != null && it.isActive == true){
                 findNavController().navigate(action)

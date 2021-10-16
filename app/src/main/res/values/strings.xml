@@ -28,7 +28,23 @@
     <string name="other">Others</string>
     <string name="save_post_tab">Save Post</string>
     <string name="save_highlights">Save Highlights</string>
-    <string name="instructions">Note : You can save highlights and pos in here by clicking the save post and save highlights on the list</string>
+    <string name="instructions">Note : You can save highlights and post in here by clicking the save post and save highlights on the list</string>
     <string name="save_post">Save Post</string>
+
+    <string name="confirm_deletion">Confirm Deletion</string>
+    <string name="deletion_body">Save Post</string>
+    <string name="cancel">cancel</string>
+    <string name="yes">yes</string>
+    <string name="search_bookmark">search</string>
+    <string name="no_data">" no translation"</string>
+    <string name="sort_by_name">Sort by name</string>
+    <string name="sort_by_date_created">Sort by date</string>
+    <string name="delete_all">Delete all</string>
+    <string name="is_save">is save</string>
+    <string name="click_the_video_to_un_mute">Click the video to un-mute</string>
+    <string name="click_here">Click here</string>
+    <string name="highlights_video">"Highlights "</string>
+    <string name="news_text">News</string>
+    <string name="instructions_bookmark">Note: click save post or save highlight in the home and highlights tabs to save here.</string>
 
 </resources>
