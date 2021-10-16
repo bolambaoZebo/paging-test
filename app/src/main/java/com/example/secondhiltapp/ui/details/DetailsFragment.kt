@@ -17,7 +17,7 @@ import com.example.secondhiltapp.databinding.FragmentGalleryBinding
 
 private val URL_3WE = "https://asia3we.com/"
 
-class DetailsFragment: Fragment(R.layout.fragment_details) {
+class DetailsFragment : Fragment(R.layout.fragment_details) {
 
     private val args by navArgs<DetailsFragmentArgs>()
 
@@ -29,19 +29,18 @@ class DetailsFragment: Fragment(R.layout.fragment_details) {
 
         _binding = FragmentDetailsBinding.bind(view)
 
-
         binding.apply {
             val video = args.video
             activity?.let {
 
             }
             webview.apply {
-                video.video?.let { this.loadUrl(it) }
+                video?.let { this.loadUrl(it) }
                 settings.javaScriptEnabled = true
-                webViewClient = object : WebViewClient(){
+                webViewClient = object : WebViewClient() {
                     override fun onPageFinished(view: WebView?, url: String?) {
                         super.onPageFinished(view, url)
-                        if( binding != null){
+                        if (binding != null) {
                             binding.progressBar.isVisible = false
                             binding.imageBanner.apply {
                                 setImageResource(R.drawable.banner_one)
@@ -61,6 +60,7 @@ class DetailsFragment: Fragment(R.layout.fragment_details) {
             }
         }
 
+        setHasOptionsMenu(true)
 
     }
 
@@ -68,6 +68,17 @@ class DetailsFragment: Fragment(R.layout.fragment_details) {
         super.onCreateOptionsMenu(menu, inflater)
         menu!!.findItem(R.id.language_icon).isVisible = false
         menu!!.findItem(R.id.sorting).isVisible = false
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        binding.apply {
+            webview.removeAllViews()
+            webview.destroy()
+            webview.clearCache(true)
+            webview.clearHistory()
+        }
     }
 
 }
@@ -102,8 +113,6 @@ class DetailsFragment: Fragment(R.layout.fragment_details) {
 //
 //})
 //.load(image_banner)
-
-
 
 
 //

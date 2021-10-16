@@ -12,23 +12,40 @@
         tools:layout="@layout/fragment_gallery" >
         <action
             android:id="@+id/action_galleryFragment_to_detailsFragment"
-            app:destination="@id/detailsFragment" />
+            app:destination="@id/detailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
         <action
             android:id="@+id/action_galleryFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
         <action
             android:id="@+id/action_galleryFragment_to_bookmarkFragment"
-            app:destination="@id/bookmarkFragment" />
+            app:destination="@id/bookmarkFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
     </fragment>
+
     <fragment
         android:id="@+id/detailsFragment"
         android:name="com.example.secondhiltapp.ui.details.DetailsFragment"
-        android:label="Highlights Video"
+        android:label="Highlights"
         tools:layout="@layout/fragment_details" >
         <argument
             android:name="video"
-            app:argType="com.example.secondhiltapp.data.SoccerVideos" />
+            app:argType="string" />
     </fragment>
+
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.secondhiltapp.ui.home.HomeFragment"
@@ -36,11 +53,22 @@
         tools:layout="@layout/home_fragment" >
         <action
             android:id="@+id/action_homeFragment_to_galleryFragment"
-            app:destination="@id/galleryFragment" />
+            app:destination="@id/galleryFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
         <action
             android:id="@+id/action_homeFragment_to_bookmarkFragment"
-            app:destination="@id/bookmarkFragment" />
+            app:destination="@id/bookmarkFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
     </fragment>
+
     <fragment
         android:id="@+id/bookmarkFragment"
         android:name="com.example.secondhiltapp.ui.bookmarks.BookmarkFragment"
@@ -48,9 +76,50 @@
         tools:layout="@layout/bookmark_fragment" >
         <action
             android:id="@+id/action_bookmarkFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
         <action
             android:id="@+id/action_bookmarkFragment_to_galleryFragment"
-            app:destination="@id/galleryFragment" />
+            app:destination="@id/galleryFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
+        <action
+            android:id="@+id/action_bookmarkFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+        <action
+            android:id="@+id/action_bookmarkFragment_to_newsDetailsFragment"
+            app:destination="@id/newsDetailsFragment" />
     </fragment>
+
+    <dialog
+        android:id="@+id/deleteAllCompletedDialogFragment"
+        android:name="com.example.secondhiltapp.ui.deleteAllCompletedDialogFragment.DeleteAllCompletedDialogFragment"
+        android:label="DeleteAllCompletedDialogFragment" />
+
+    <action
+        android:id="@+id/action_global_deleteAllCompletedDialogFragment"
+        app:destination="@id/deleteAllCompletedDialogFragment" />
+    <fragment
+        android:id="@+id/newsDetailsFragment"
+        android:name="com.example.secondhiltapp.ui.details.NewsDetailsFragment"
+        android:label="News"
+        tools:layout="@layout/fragment_details_news" >
+        <argument
+            android:name="newsText"
+            app:argType="string" />
+        <argument
+            android:name="newsTitle"
+            app:argType="string" />
+        <argument
+            android:name="image"
+            app:argType="string" />
+    </fragment>
+
 </navigation>

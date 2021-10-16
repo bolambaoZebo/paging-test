@@ -8,10 +8,13 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.SupervisorJob
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Qualifier
 import javax.inject.Singleton
 
 @Module
@@ -22,7 +25,7 @@ object AppModule {
     @Singleton
     fun provideRetrofit(): Retrofit =
         Retrofit.Builder()
-            .client(getLoggingHttpClient())
+            //.client(getLoggingHttpClient())
             .baseUrl(ApiSoccer.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
@@ -52,6 +55,12 @@ object AppModule {
 
     @Provides
     @Singleton
+    fun getBookmark(appDB: AppRoom) : BookmarkDao {
+        return appDB.getBookmarkDao()
+    }
+
+    @Provides
+    @Singleton
     fun getIsActiveDao(appDB: AppRoom) : IsActiveDao {
         return appDB.getIsActiveDao()
     }
@@ -68,4 +77,13 @@ object AppModule {
         return builder.build()
     }
 
+    @ApplicationScope
+    @Provides
+    @Singleton
+    fun provideApplicationScope() = CoroutineScope(SupervisorJob())
+
 }
+
+@Retention(AnnotationRetention.RUNTIME)
+@Qualifier
+annotation class ApplicationScope

@@ -17,14 +17,30 @@
     <string name="bundesliga">德甲</string>
     <string name="french_ligue">法甲</string>
     <string name="other">其他</string>
-    <string name="save_post_tab">保存帖子</string>
     <string name="save_highlights">" 保存亮点"</string>
-    <string name="search_instructions" translatable="false">" 点击放大镜开始搜索"</string>
     <string name="retry">" 重试"</string>
     <string name="refresh">" 刷新"</string>
     <string name="could_not_refresh">无法刷新：%s</string>
     <string name="could_not_load_search_results">" 无法加载搜索结果：%s"</string>
     <string name="unknown_error_occurred">" 出现未知错误"</string>
-    <string name="instructions">注意：您可以通过单击列表中的保存帖子和保存突出显示在此处保存突出显示和位置</string>
     <string name="save_post">保存帖子</string>
+    <string name="no_data">" 没有翻译"</string>
+    <string name="search_bookmark">搜索</string>
+    <string name="sort_by_name">"按名称分类 "</string>
+    <string name="sort_by_date_created">" 按创建日期排序"</string>
+    <string name="delete_all">删除所有书签</string>
+    <string name="is_save">是保存</string>
+    <string name="click_the_video_to_un_mute">" 点击视频取消静音"</string>
+    <string name="click_here">点击这里</string>
+    <string name="highlights_video">" 精彩视频"</string>
+    <string name="news_text">消息</string>
+    <string name="search_instructions">点击放大镜开始搜索</string>
+    <string name="search">搜索</string>
+    <string name="confirm_deletion">" 确认删除"</string>
+    <string name="deletion_body">您真的要删除所有已完成的任务吗？</string>
+    <string name="cancel">取消</string>
+    <string name="yes">"是的 "</string>
+    <string name="instructions_bookmark">注意：您可以通过单击保存帖子和保存亮点主页和亮点选项卡在此处保存书签</string>
+    <string name="save_post_tab">" 保存帖子"</string>
+    <string name="instructions">注意：您可以通过单击列表中的“保存帖子和保存重点”来保存重点并在此处发帖</string>
 </resources>
