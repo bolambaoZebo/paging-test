@@ -15,20 +15,6 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/bookmark_tab"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/save_highlights" />
-
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/save_post_tab" />
-            </com.google.android.material.tabs.TabLayout>
 
             <TextView
                 android:layout_width="match_parent"
@@ -44,7 +30,7 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintTop_toBottomOf="@id/header_layout"
                 tools:layout_editor_absoluteX="0dp"
-                tools:listitem="@layout/item_unsplash_photo" />
+                tools:listitem="@layout/item_bookmark" />
 
             <ProgressBar
                 android:id="@+id/bookmark_progress_bar"
