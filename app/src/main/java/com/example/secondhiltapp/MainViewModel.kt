@@ -1,8 +1,6 @@
 package com.example.secondhiltapp
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.recyclerview.widget.RecyclerView
 import com.example.secondhiltapp.data.RoomRepository
 import com.example.secondhiltapp.db.entity.LanguageData
 import dagger.hilt.android.lifecycle.HiltViewModel

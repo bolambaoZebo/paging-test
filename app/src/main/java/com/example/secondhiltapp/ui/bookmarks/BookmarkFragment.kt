@@ -5,7 +5,6 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -19,14 +18,10 @@ import com.example.secondhiltapp.R
 import com.example.secondhiltapp.databinding.BookmarkFragmentBinding
 import com.example.secondhiltapp.db.entity.BookMarkData
 import com.example.secondhiltapp.preferences.SortOrder
-import com.example.secondhiltapp.utils.Resource
 import com.example.secondhiltapp.utils.onQueryTextChanged
-import com.example.secondhiltapp.utils.snackbar
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class BookmarkFragment : Fragment(R.layout.bookmark_fragment), BookmarkAdapter.OnItemBookmarkClick {

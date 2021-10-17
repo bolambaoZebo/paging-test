@@ -9,11 +9,8 @@ import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
@@ -22,11 +19,6 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.secondhiltapp.databinding.ActivityMainBinding
 import com.example.secondhiltapp.db.entity.LanguageData
-import com.example.secondhiltapp.ui.bookmarks.BookmarkFragment
-import com.example.secondhiltapp.ui.gallery.GalleryFragment
-import com.example.secondhiltapp.ui.home.HomeFragment
-import com.example.secondhiltapp.ui.home.HomeViewModel
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
