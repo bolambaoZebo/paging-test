@@ -32,7 +32,7 @@
     <string name="save_post">Save Post</string>
 
     <string name="confirm_deletion">Confirm Deletion</string>
-    <string name="deletion_body">Save Post</string>
+    <string name="deletion_body">Do you want to delete all bookmarks?</string>
     <string name="cancel">cancel</string>
     <string name="yes">yes</string>
     <string name="search_bookmark">search</string>

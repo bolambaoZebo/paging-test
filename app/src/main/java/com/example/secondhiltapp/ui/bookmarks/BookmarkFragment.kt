@@ -160,8 +160,8 @@ class BookmarkFragment : Fragment(R.layout.bookmark_fragment), BookmarkAdapter.O
                     SortOrder.BY_NEWS -> {
                         val action =
                             BookmarkFragmentDirections.actionBookmarkFragmentToNewsDetailsFragment(
-                                if (lang == LOCAL_ENGLISH)bookmark.description!! else bookmark.titleChinese!!,
-                                if (lang == LOCAL_ENGLISH)bookmark.title!! else bookmark.descriptionChinese!!,
+                                if (lang == LOCAL_ENGLISH)bookmark.title!! else bookmark.titleChinese!!,
+                                if (lang == LOCAL_ENGLISH)bookmark.description!! else bookmark.descriptionChinese!!,
                                 bookmark.imageUrl!!
                             )
                         findNavController().navigate(action)

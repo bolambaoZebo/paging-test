@@ -10,41 +10,41 @@
         android:title="Sort"
         app:showAsAction="always"
         >
-        <menu>
+<!--        <menu>-->
 
-            <item
-                android:id="@+id/premier"
-                android:title="@string/premier_league" />
+<!--            <item-->
+<!--                android:id="@+id/premier"-->
+<!--                android:title="@string/premier_league" />-->
 
-            <item
-                android:id="@+id/uefa"
-                android:title="@string/uefa_champions_league" />
+<!--            <item-->
+<!--                android:id="@+id/uefa"-->
+<!--                android:title="@string/uefa_champions_league" />-->
 
-            <item
-                android:id="@+id/europa"
-                android:title="@string/europa_league" />
+<!--            <item-->
+<!--                android:id="@+id/europa"-->
+<!--                android:title="@string/europa_league" />-->
 
-            <item
-                android:id="@+id/laliga"
-                android:title="@string/la_liga" />
+<!--            <item-->
+<!--                android:id="@+id/laliga"-->
+<!--                android:title="@string/la_liga" />-->
 
-            <item
-                android:id="@+id/series"
-                android:title="@string/serie_a" />
+<!--            <item-->
+<!--                android:id="@+id/series"-->
+<!--                android:title="@string/serie_a" />-->
 
-            <item
-                android:id="@+id/bundesliga"
-                android:title="@string/bundesliga" />
+<!--            <item-->
+<!--                android:id="@+id/bundesliga"-->
+<!--                android:title="@string/bundesliga" />-->
 
-            <item
-                android:id="@+id/frenchligue"
-                android:title="@string/french_ligue" />
+<!--            <item-->
+<!--                android:id="@+id/frenchligue"-->
+<!--                android:title="@string/french_ligue" />-->
 
-            <item
-                android:id="@+id/other"
-                android:title="@string/other" />
+<!--            <item-->
+<!--                android:id="@+id/other"-->
+<!--                android:title="@string/other" />-->
 
-        </menu>
+<!--        </menu>-->
 
     </item>
 
