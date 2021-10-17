@@ -15,7 +15,12 @@ import javax.inject.Singleton
 
 private const val TAG = "PreferencesManager"
 
-enum class SortOrder { BY_NAME, BY_DATE }
+enum class SortOrder {
+    BY_NAME,
+    BY_DATE,
+    BY_NEWS,
+    BY_HIGHLIGHTS
+}
 
 enum class BOOKMARKTYPE { NEWS, HIGHLIGHTS }
 

@@ -5,12 +5,15 @@ import androidx.lifecycle.*
 import com.example.secondhiltapp.data.RoomRepository
 import com.example.secondhiltapp.data.SoccerRepository
 import com.example.secondhiltapp.db.BookmarkDao
+import com.example.secondhiltapp.db.entity.BookMarkData
 import com.example.secondhiltapp.preferences.PreferencesManager
+import com.example.secondhiltapp.preferences.SortOrder
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -24,13 +27,12 @@ class BookmarkViewModel @Inject constructor(
 
     //val soccers = soccerRepository.getSoccerNews().asLiveData()
 
-
     val searchQuery = state.getLiveData("searchQuery", "")
 
     val preferencesFlow = preferencesManager.preferencesFlow
 
-    private val bookmarkEventChannel = Channel<TasksEvent>()
-    val tasksEvent = bookmarkEventChannel.receiveAsFlow()
+    private val bookmarkEventChannel = Channel<BookmarkEvent>()
+    val bookmarkEvent = bookmarkEventChannel.receiveAsFlow()
 
     private val bookmarksFlow = combine(
         searchQuery.asFlow(),
@@ -43,12 +45,29 @@ class BookmarkViewModel @Inject constructor(
 
     val bookmark = bookmarksFlow.asLiveData()
 
-    sealed class TasksEvent {
-        object NavigateToAddTaskScreen : TasksEvent()
+    fun onSortOrderSelected(sortOrder: SortOrder) = viewModelScope.launch {
+        preferencesManager.updateSortOrder(sortOrder)
+    }
+
+    fun onTaskSwiped(bookMarkData: BookMarkData) = viewModelScope.launch {
+        bookmarkDao.delete(bookMarkData)
+        bookmarkEventChannel.send(BookmarkEvent.ShowUndoDeleteTaskMessage(bookMarkData))//tasksEventChannel.send(TasksEvent.ShowUndoDeleteTaskMessage(task))
+    }
+
+    fun onUndoDeleteClick(bookMarkData: BookMarkData) = viewModelScope.launch {
+        bookmarkDao.insert(bookMarkData)
+    }
+
+    fun onDeleteAllCompletedClick() = viewModelScope.launch {
+        bookmarkEventChannel.send(BookmarkEvent.NavigateToDeleteAllCompletedScreen)
+    }
+
+    sealed class BookmarkEvent {
+        object NavigateToAddTaskScreen : BookmarkEvent()
+        data class ShowUndoDeleteTaskMessage(val bookMarkData: BookMarkData) : BookmarkEvent()
 //        data class NavigateToEditTaskScreen(val task: Task) : TasksEvent()
-//        data class ShowUndoDeleteTaskMessage(val task: Task) : TasksEvent()
 //        data class ShowTaskSavedConfirmationMessage(val msg: String) : TasksEvent()
-//        object NavigateToDeleteAllCompletedScreen : TasksEvent()
+        object NavigateToDeleteAllCompletedScreen : BookmarkEvent()
     }
 
 }

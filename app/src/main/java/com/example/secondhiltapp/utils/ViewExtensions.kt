@@ -2,6 +2,7 @@ package com.example.secondhiltapp.utils
 
 import android.view.View
 import android.widget.ImageView
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
@@ -37,4 +38,17 @@ fun ImageView.show(){
 
 fun ImageView.hide(){
     visibility = View.GONE
+}
+
+inline fun SearchView.onQueryTextChanged(crossinline listener: (String) -> Unit) {
+    this.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        override fun onQueryTextSubmit(query: String?): Boolean {
+            return true
+        }
+
+        override fun onQueryTextChange(newText: String?): Boolean {
+            listener(newText.orEmpty())
+            return true
+        }
+    })
 }

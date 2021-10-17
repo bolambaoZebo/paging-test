@@ -9,6 +9,7 @@ import com.example.secondhiltapp.db.BookmarkDao
 import com.example.secondhiltapp.db.entity.BookMarkData
 import com.example.secondhiltapp.db.entity.SoccerNews
 import com.example.secondhiltapp.preferences.BOOKMARKTYPE
+import com.example.secondhiltapp.preferences.SortOrder
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
@@ -42,7 +43,7 @@ class HomeViewModel @Inject constructor(
             bookMarkData.descriptionChinese,
             System.currentTimeMillis(),
             false,
-            BOOKMARKTYPE.NEWS
+            SortOrder.BY_NEWS
         )
         if (bookMarkData != null){
             saveBookmark(data)

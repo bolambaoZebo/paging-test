@@ -10,8 +10,10 @@ interface BookmarkDao {
 
     fun getBookmarks(query: String, sortOrder: SortOrder, hideCompleted: Boolean): Flow<List<BookMarkData>> =
         when (sortOrder) {
-            SortOrder.BY_DATE -> getAllBookmark()//getTasksSortedByDateCreated(query, hideCompleted)
-            SortOrder.BY_NAME -> getAllBookmark()//getTasksSortedByName(query, hideCompleted)
+            SortOrder.BY_DATE -> getTasksSortedByName(query)
+            SortOrder.BY_NAME -> getAllBookmark(query)
+            SortOrder.BY_NEWS -> getAllNews(sortOrder,query)
+            SortOrder.BY_HIGHLIGHTS -> getAllHighlights(sortOrder,query)
         }
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun savaBookmark(soccerNews: List<BookMarkData>)
@@ -22,31 +24,19 @@ interface BookmarkDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(bookMarkData: BookMarkData)
 
-    @Query("SELECT * FROM bookmark")
-    fun getAllBookmark() : Flow<List<BookMarkData>>
+    @Query("SELECT * FROM bookmark WHERE title LIKE '%' || :searchQuery || '%' ORDER BY title")
+    fun getAllBookmark(searchQuery: String) : Flow<List<BookMarkData>>
 
-//    fun getTasks(query: String, sortOrder: SortOrder, hideCompleted: Boolean): Flow<List<Task>> =
-//        when (sortOrder) {
-//            SortOrder.BY_DATE -> getTasksSortedByDateCreated(query, hideCompleted)
-//            SortOrder.BY_NAME -> getTasksSortedByName(query, hideCompleted)
-//        }
-//
-//    @Query("SELECT * FROM task_table WHERE (completed != :hideCompleted OR completed = 0) AND name LIKE '%' || :searchQuery || '%' ORDER BY important DESC, name")
-//    fun getTasksSortedByName(searchQuery: String, hideCompleted: Boolean): Flow<List<Task>>
-//
-//    @Query("SELECT * FROM task_table WHERE (completed != :hideCompleted OR completed = 0) AND name LIKE '%' || :searchQuery || '%' ORDER BY important DESC, created")
-//    fun getTasksSortedByDateCreated(searchQuery: String, hideCompleted: Boolean): Flow<List<Task>>
-//
-//    @Insert(onConflict = OnConflictStrategy.REPLACE)
-//    suspend fun insert(task: Task)
-//
-//    @Update
-//    suspend fun update(task: Task)
-//
-//    @Delete
-//    suspend fun delete(task: Task)
-//
-//    @Query("DELETE FROM task_table WHERE completed = 1")
-//    suspend fun deleteCompletedTasks()
+    @Delete
+    suspend fun delete(bookMarkData: BookMarkData)
+
+    @Query("SELECT * FROM bookmark WHERE title LIKE '%' || :searchQuery || '%' ORDER BY created DESC")
+    fun getTasksSortedByName(searchQuery: String): Flow<List<BookMarkData>>
+
+    @Query("SELECT * FROM bookmark WHERE type == :sortOrder AND title LIKE '%' || :searchQuery || '%' ORDER BY created DESC")
+    fun getAllNews(sortOrder: SortOrder,searchQuery: String): Flow<List<BookMarkData>>
+
+    @Query("SELECT * FROM bookmark WHERE type == :sortOrder AND title LIKE '%' || :searchQuery || '%'ORDER BY created DESC")
+    fun getAllHighlights(sortOrder: SortOrder,searchQuery: String): Flow<List<BookMarkData>>
 
 }

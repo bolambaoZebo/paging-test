@@ -18,7 +18,9 @@ import com.example.secondhiltapp.R
 import com.example.secondhiltapp.data.SoccerVideos
 import com.example.secondhiltapp.databinding.FragmentGalleryBinding
 import com.example.secondhiltapp.utils.snackbar
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class GalleryFragment : Fragment(R.layout.fragment_gallery), SoccerVideoAdapter.OnItemClickListener{
@@ -33,7 +35,10 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery), SoccerVideoAdapter.
 
         _binding = FragmentGalleryBinding.bind(view)
 
-        val adapter = SoccerVideoAdapter(this)
+        val adapter = SoccerVideoAdapter(this,
+            onBookmarkClick = { video ->
+                viewModel.onBookmarkClick(video)
+             })
 
         binding.apply {
             recyclerView.setHasFixedSize(true)
@@ -52,6 +57,16 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery), SoccerVideoAdapter.
             viewModel.photos.observe(viewLifecycleOwner, Observer {
                 adapter.submitData(viewLifecycleOwner.lifecycle, it)
             })
+        }
+
+        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+            viewModel.galleryEvent.collect { video ->
+                when(video){
+                    is GalleryViewModel.GalleryEvents.SaveHighlights -> {
+                        Snackbar.make(requireView(), video.data.title.toString(), Snackbar.LENGTH_LONG).show()
+                    }
+                }
+            }
         }
 
 
