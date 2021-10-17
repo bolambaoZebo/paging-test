@@ -1,9 +1,7 @@
 package com.example.secondhiltapp.ui.details
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
@@ -35,5 +33,13 @@ class NewsDetailsFragment : Fragment(R.layout.fragment_details_news) {
             newsTitle.text = args.newsTitle
             newsDescription.text = args.newsText
         }
+
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        menu!!.findItem(R.id.language_icon).isVisible = false
+        menu!!.findItem(R.id.sorting).isVisible = false
     }
 }

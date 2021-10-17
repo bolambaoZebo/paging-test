@@ -4,6 +4,7 @@ import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.secondhiltapp.R
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 
@@ -26,7 +27,7 @@ fun RecyclerView.hide(){
 
 fun View.snackbar(message: String){
     Snackbar.make(this, message, Snackbar.LENGTH_LONG).also { snackbar ->
-        snackbar.setAction("Ok"){
+        snackbar.setAction(resources.getString(R.string.ok)){
             snackbar.dismiss()
         }
     }.show()

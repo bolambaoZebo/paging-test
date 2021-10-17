@@ -25,7 +25,9 @@ class BookmarkViewModel @Inject constructor(
     private val bookmarkDao: BookmarkDao
 ) : ViewModel() {
 
+    val isActive = repository.getIsActive()
     //val soccers = soccerRepository.getSoccerNews().asLiveData()
+    fun currentLang() = soccerRepository.getLanguageNow()
 
     val searchQuery = state.getLiveData("searchQuery", "")
 

@@ -63,7 +63,9 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery), SoccerVideoAdapter.
             viewModel.galleryEvent.collect { video ->
                 when(video){
                     is GalleryViewModel.GalleryEvents.SaveHighlights -> {
-                        Snackbar.make(requireView(), video.data.title.toString(), Snackbar.LENGTH_LONG).show()
+                        Snackbar.make(requireView(), video.data.title.toString(), Snackbar.LENGTH_LONG)
+                            .setAction("OK"){}
+                            .show()
                     }
                 }
             }
@@ -98,7 +100,7 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery), SoccerVideoAdapter.
             if (it != null && it.isActive == true){
                 findNavController().navigate(action)
             }else{
-                binding.rootGalleryLayout.snackbar("Thank you for your visit")
+                binding.rootGalleryLayout.snackbar(resources.getString(R.string.thank_you_for_visiting))
             }
         }
     }

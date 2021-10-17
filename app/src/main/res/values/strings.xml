@@ -4,7 +4,7 @@
     <string name="title_search_news">HighLights</string>
     <string name="title_bookmarks">Bookmarks</string>
     <string name="breaking" translatable="false">Home</string>
-    <string name="search" translatable="false">HighLights</string>
+    <string name="search">HighLights</string>
     <string name="bookmarks" translatable="false">Bookmarks</string>
     <string name="could_not_refresh">Could not refresh: %s</string>
     <string name="could_not_load_search_results">Could not load search results: %s</string>
@@ -37,7 +37,6 @@
     <string name="yes">yes</string>
     <string name="search_bookmark">search</string>
     <string name="no_data">" no translation"</string>
-    <string name="sort_by_name">Sort by name</string>
     <string name="sort_by_date_created">Sort by date</string>
     <string name="delete_all">Delete all</string>
     <string name="is_save">is save</string>
@@ -46,5 +45,14 @@
     <string name="highlights_video">"Highlights "</string>
     <string name="news_text">News</string>
     <string name="instructions_bookmark">Note: click save post or save highlight in the home and highlights tabs to save here.</string>
+    <string name="home_post">Home Post</string>
+    <string name="highlights_post">Highlights Post</string>
+    <string name="sort_by_date">Sort by date created</string>
+    <string name="sort_by_name">Sort by name</string>
+    <string name="delete_all_bookmark">Delete All</string>
+
+    <string name="thank_you_for_visiting">Thank you for visiting.</string>
+
+    <string name="ok">OK</string>
 
 </resources>

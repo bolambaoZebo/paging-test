@@ -14,11 +14,14 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.secondhiltapp.LOCAL_ENGLISH
 import com.example.secondhiltapp.R
 import com.example.secondhiltapp.databinding.BookmarkFragmentBinding
+import com.example.secondhiltapp.db.entity.BookMarkData
 import com.example.secondhiltapp.preferences.SortOrder
 import com.example.secondhiltapp.utils.Resource
 import com.example.secondhiltapp.utils.onQueryTextChanged
+import com.example.secondhiltapp.utils.snackbar
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -26,7 +29,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class BookmarkFragment : Fragment(R.layout.bookmark_fragment) {
+class BookmarkFragment : Fragment(R.layout.bookmark_fragment), BookmarkAdapter.OnItemBookmarkClick {
 
     private val viewModel by viewModels<BookmarkViewModel>()
 
@@ -40,7 +43,7 @@ class BookmarkFragment : Fragment(R.layout.bookmark_fragment) {
 
         _binding = BookmarkFragmentBinding.bind(view)
 
-        val bookmarkAdapter = BookmarkAdapter()
+        val bookmarkAdapter = BookmarkAdapter(this)
 
         binding.apply {
             bookmarkRecyclerView.apply {
@@ -90,6 +93,12 @@ class BookmarkFragment : Fragment(R.layout.bookmark_fragment) {
             bookmarkAdapter.submitList(it)
         }
 
+        viewModel.currentLang().observe(viewLifecycleOwner) {
+            if (it != null){
+                bookmarkAdapter.setLanguagesTo(it.language)
+            }
+        }
+
         setHasOptionsMenu(true)
     }
 
@@ -132,11 +141,6 @@ class BookmarkFragment : Fragment(R.layout.bookmark_fragment) {
                 viewModel.onSortOrderSelected(SortOrder.BY_HIGHLIGHTS)
                 true
             }
-//            R.id.action_hide_completed_tasks -> {
-//                item.isChecked = !item.isChecked
-//                viewModel.onHideCompletedClick(item.isChecked)
-//                true
-//            }
             R.id.action_delete_all_completed_tasks -> {
                 viewModel.onDeleteAllCompletedClick()
                 true
@@ -147,5 +151,36 @@ class BookmarkFragment : Fragment(R.layout.bookmark_fragment) {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    override fun onItemClick(bookmark: BookMarkData, lang: String) {
+        viewModel.isActive?.observe(viewLifecycleOwner){
+            if (it != null && it.isActive == true){
+                when(bookmark.type){
+                    SortOrder.BY_NEWS -> {
+                        val action =
+                            BookmarkFragmentDirections.actionBookmarkFragmentToNewsDetailsFragment(
+                                if (lang == LOCAL_ENGLISH)bookmark.description!! else bookmark.titleChinese!!,
+                                if (lang == LOCAL_ENGLISH)bookmark.title!! else bookmark.descriptionChinese!!,
+                                bookmark.imageUrl!!
+                            )
+                        findNavController().navigate(action)
+                    }
+                    SortOrder.BY_HIGHLIGHTS -> {
+                        val action =
+                            BookmarkFragmentDirections.actionBookmarkFragmentToDetailsFragment(
+                                bookmark.video!!
+                            )
+                        findNavController().navigate(action)
+                    }
+                }
+            }else{
+                Snackbar.make(requireView(), resources.getString(R.string.thank_you_for_visiting), Snackbar.LENGTH_LONG)
+                    .setAction(resources.getString(R.string.ok)){}
+                    .show()
+            }
+
+        }
+
     }
 }

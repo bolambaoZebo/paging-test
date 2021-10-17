@@ -57,7 +57,9 @@ class HomeFragment : Fragment(R.layout.home_fragment), HomeFragmentAdapter.OnCli
             viewModel.addEditTaskEvent.collect { event ->
                 when (event) {
                     is HomeViewModel.AddEditTaskEvent.SaveBookmark -> {
-                        Snackbar.make(requireView(), event.msg, Snackbar.LENGTH_LONG).show()
+                        Snackbar.make(requireView(), event.msg, Snackbar.LENGTH_LONG)
+                            .setAction("Ok"){}
+                            .show()
                     }
                 }
             }

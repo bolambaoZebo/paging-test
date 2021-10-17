@@ -55,7 +55,7 @@ class GalleryViewModel @Inject constructor(
             data.thumbnail,
             data.video,
             data.thumbnail,
-            "",
+            data.title + "don't miss the action!",
             "",
             "",
             "",

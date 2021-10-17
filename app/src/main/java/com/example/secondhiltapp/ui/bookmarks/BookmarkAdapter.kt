@@ -7,18 +7,30 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.example.secondhiltapp.LOCAL_ENGLISH
 import com.example.secondhiltapp.R
 import com.example.secondhiltapp.databinding.ItemBookmarkBinding
 import com.example.secondhiltapp.db.entity.BookMarkData
+import com.example.secondhiltapp.preferences.SortOrder
 
-class BookmarkAdapter : ListAdapter<BookMarkData, BookmarkAdapter.BookMarkViewHolder>(DiffCallback()) {
+class BookmarkAdapter(
+    private val listener: OnItemBookmarkClick
+) : ListAdapter<BookMarkData, BookmarkAdapter.BookMarkViewHolder>(DiffCallback()) {
 
-    class BookMarkViewHolder(private val binding: ItemBookmarkBinding) : RecyclerView.ViewHolder(binding.root){
+    private var language = "en"
+
+    inner class BookMarkViewHolder(private val binding: ItemBookmarkBinding) : RecyclerView.ViewHolder(binding.root){
 
         fun bind(bookmark: BookMarkData){
             binding.apply {
-                bookmarkItemTitle.text = bookmark.title
-                bookmarkItemDescription.text = bookmark.description
+
+                if (language == LOCAL_ENGLISH){
+                    bookmarkItemTitle.text = bookmark.title
+                    bookmarkItemDescription.text = bookmark.description
+                }else{
+                    bookmarkItemTitle.text = if (bookmark.type == SortOrder.BY_NEWS) bookmark.titleChinese else bookmark.title
+                    bookmarkItemDescription.text = if (bookmark.type == SortOrder.BY_NEWS) bookmark.descriptionChinese else bookmark.description
+                }
 
                 Glide.with(itemView)
                     .load(bookmark.imageUrl)
@@ -26,6 +38,10 @@ class BookmarkAdapter : ListAdapter<BookMarkData, BookmarkAdapter.BookMarkViewHo
                     .transition(DrawableTransitionOptions.withCrossFade())
                     .error(R.drawable.ic_error)
                     .into(bookmarkItemImage)
+
+                rootItemBookmark.setOnClickListener {
+                    listener.onItemClick(bookmark, language)
+                }
             }
         }
     }
@@ -49,4 +65,18 @@ class BookmarkAdapter : ListAdapter<BookMarkData, BookmarkAdapter.BookMarkViewHo
             oldItem == newItem
 
     }
+
+    fun setLanguagesTo(lang: String){
+        language = lang
+        notifyDataSetChanged()
+    }
+
+    fun getLanguage() : String {
+        return language
+    }
+
+    interface OnItemBookmarkClick {
+        fun onItemClick(bookmark: BookMarkData, lang: String)
+    }
+
 }
