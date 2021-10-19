@@ -30,8 +30,8 @@ class NewsDetailsFragment : Fragment(R.layout.fragment_details_news) {
                 .error(R.drawable.ic_error)
                 .into(newsDetailsImage)
 
-            newsTitle.text = args.newsTitle
-            newsDescription.text = args.newsText
+            newsTitle.text = args.newsText
+            newsDescription.text = args.newsTitle
         }
 
         setHasOptionsMenu(true)

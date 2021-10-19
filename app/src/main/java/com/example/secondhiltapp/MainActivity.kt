@@ -21,6 +21,7 @@ import com.example.secondhiltapp.databinding.ActivityMainBinding
 import com.example.secondhiltapp.db.entity.LanguageData
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
+import org.intellij.lang.annotations.Language
 import java.util.*
 
 const val LOCAL_ENGLISH = "en"
@@ -143,7 +144,7 @@ class MainActivity : AppCompatActivity() {
         conf.setLocale(local)
         res.updateConfiguration(conf, dm)
         refreshIntent(this, MainActivity::class.java)
-//        mainViewModel.setLanguage(Language(language))
+        mainViewModel.setLanguage(LanguageData(language))
     }
 
     private fun refreshIntent(context: Context, java: Class<MainActivity>) {
