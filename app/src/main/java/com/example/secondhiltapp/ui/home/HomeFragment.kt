@@ -11,6 +11,8 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.secondhiltapp.R
 import com.example.secondhiltapp.databinding.HomeFragmentBinding
 import com.example.secondhiltapp.db.entity.SoccerNews
+import com.example.secondhiltapp.ui.gallery.GalleryViewModel
+import com.example.secondhiltapp.utils.snackBar
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -47,9 +49,10 @@ class HomeFragment : Fragment(R.layout.home_fragment), HomeFragmentAdapter.OnCli
             viewModel.addEditTaskEvent.collect { event ->
                 when (event) {
                     is HomeViewModel.AddEditTaskEvent.SaveBookmark -> {
-                        Snackbar.make(requireView(), event.msg, Snackbar.LENGTH_LONG)
-                            .setAction("Ok"){}
-                            .show()
+                        requireActivity().snackBar(event.msg, requireActivity())
+                    }
+                    is HomeViewModel.AddEditTaskEvent.AlreadySaved -> {
+                        requireActivity().snackBar(event.msg, requireActivity())
                     }
                 }
             }

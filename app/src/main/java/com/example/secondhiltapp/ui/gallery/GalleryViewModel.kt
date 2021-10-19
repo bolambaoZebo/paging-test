@@ -63,8 +63,14 @@ class GalleryViewModel @Inject constructor(
             false,
             SortOrder.BY_HIGHLIGHTS
         )
-        bookmarkDao.insert(bookmark)
-        galleryEventsChannel.send(GalleryEvents.SaveHighlights(data))
+        val isSave = bookmarkDao.getBookmark(data.title!!)
+
+        if (isSave == null){
+            bookmarkDao.insert(bookmark)
+            galleryEventsChannel.send(GalleryEvents.SaveHighlights("${data.title} is saved"))
+        }else{
+            galleryEventsChannel.send(GalleryEvents.AllreadySaveHighlights("${data.title} is already saved"))
+        }
     }
 
     companion object {
@@ -73,6 +79,7 @@ class GalleryViewModel @Inject constructor(
     }
 
     sealed class GalleryEvents {
-        data class SaveHighlights(val data: SoccerVideos) : GalleryEvents()
+        data class SaveHighlights(val data: String) : GalleryEvents()
+        data class AllreadySaveHighlights(val data: String) : GalleryEvents()
     }
 }

@@ -1,8 +1,10 @@
 package com.example.secondhiltapp.utils
 
+import android.view.Gravity
 import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.widget.SearchView
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.secondhiltapp.R
 import com.google.android.material.snackbar.Snackbar

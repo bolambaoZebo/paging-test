@@ -2,9 +2,11 @@ package com.example.secondhiltapp.ui.gallery
 
 
 import android.os.Bundle
+import android.view.Gravity
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -12,16 +14,21 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
+import com.example.secondhiltapp.MainActivity
 import com.example.secondhiltapp.R
 import com.example.secondhiltapp.data.SoccerVideos
 import com.example.secondhiltapp.databinding.FragmentGalleryBinding
+import com.example.secondhiltapp.utils.snackBar
 import com.example.secondhiltapp.utils.snackbar
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_details.*
 import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
-class GalleryFragment : Fragment(R.layout.fragment_gallery), SoccerVideoAdapter.OnItemClickListener{
+class GalleryFragment : Fragment(R.layout.fragment_gallery),
+    SoccerVideoAdapter.OnItemClickListener
+{
 
     private val viewModel by viewModels<GalleryViewModel>()
 
@@ -51,7 +58,6 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery), SoccerVideoAdapter.
         }
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-
             viewModel.photos.observe(viewLifecycleOwner, Observer {
                 adapter.submitData(viewLifecycleOwner.lifecycle, it)
             })
@@ -61,9 +67,10 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery), SoccerVideoAdapter.
             viewModel.galleryEvent.collect { video ->
                 when(video){
                     is GalleryViewModel.GalleryEvents.SaveHighlights -> {
-                        Snackbar.make(requireView(), video.data.title.toString(), Snackbar.LENGTH_LONG)
-                            .setAction("OK"){}
-                            .show()
+                       requireActivity().snackBar(video.data, requireActivity())
+                    }
+                    is GalleryViewModel.GalleryEvents.AllreadySaveHighlights -> {
+                        requireActivity().snackBar(video.data, requireActivity())
                     }
                 }
             }
@@ -73,6 +80,9 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery), SoccerVideoAdapter.
         adapter.addLoadStateListener { loadState ->
             binding.apply {
                 progressBar.isVisible = loadState.source.refresh is LoadState.Loading
+//                swipeRefreshLayout.setOnRefreshListener {
+//                    swipeRefreshLayout.isRefreshing = loadState.source.refresh is LoadState.Loading
+//                }
                 recyclerView.isVisible = loadState.source.refresh is LoadState.NotLoading
                 buttonRetry.isVisible = loadState.source.refresh is LoadState.Error
                 textViewError.isVisible = loadState.source.refresh is LoadState.Error
@@ -113,6 +123,7 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery), SoccerVideoAdapter.
         menu!!.findItem(R.id.language_icon).isVisible = false
         menu!!.findItem(R.id.sorting).isVisible = false
     }
+
 }
 
 

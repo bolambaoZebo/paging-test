@@ -27,6 +27,9 @@ interface BookmarkDao {
     @Query("SELECT * FROM bookmark WHERE title LIKE '%' || :searchQuery || '%' ORDER BY title")
     fun getAllBookmark(searchQuery: String) : Flow<List<BookMarkData>>
 
+    @Query("SELECT * FROM bookmark WHERE title LIKE '%' || :title || '%'")
+    fun getBookmark(title: String) : BookMarkData
+
     @Delete
     suspend fun delete(bookMarkData: BookMarkData)
 

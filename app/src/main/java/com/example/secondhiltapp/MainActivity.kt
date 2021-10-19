@@ -11,6 +11,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
@@ -19,22 +20,38 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.secondhiltapp.databinding.ActivityMainBinding
 import com.example.secondhiltapp.db.entity.LanguageData
+import com.example.secondhiltapp.ui.gallery.GalleryFragment
+import com.example.secondhiltapp.utils.snackbar
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 import org.intellij.lang.annotations.Language
 import java.util.*
+import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.appbar.AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS
+
+import com.google.android.material.appbar.AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL
+
+
+
+
+
+
 
 const val LOCAL_ENGLISH = "en"
 const val LOCAL_CHINESE = "zh"
 
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity()
+{
 
     private val mainViewModel by viewModels<MainViewModel>()
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     private lateinit var local: Locale
+    lateinit var coordinatedLayout: CoordinatorLayout
+    private lateinit var appBarLayout: AppBarLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +60,10 @@ class MainActivity : AppCompatActivity() {
 
         setupLanguage()
 
+        binding.apply {
+            coordinatedLayout = mainCoordinatedLayout
+            appBarLayout = appBar
+        }
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
         navController = navHostFragment.findNavController()
 
@@ -90,10 +111,17 @@ class MainActivity : AppCompatActivity() {
     private fun isNotReselected(id: Int, currentId: Int?) {
         if(id != currentId && currentId != null){
             navController.navigate(id)
+            appBarLayout.setExpanded(true,true)
         }
     }
 
+    override fun onBackPressed() {
+        appBarLayout.setExpanded(true,true)
+        super.onBackPressed()
+    }
+
     override fun onSupportNavigateUp(): Boolean {
+        appBarLayout.setExpanded(true,true)
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
@@ -152,7 +180,6 @@ class MainActivity : AppCompatActivity() {
         startActivity(refresh)
         finish()
     }
-
 
 
 }

@@ -10,6 +10,7 @@ import com.example.secondhiltapp.db.entity.BookMarkData
 import com.example.secondhiltapp.db.entity.SoccerNews
 import com.example.secondhiltapp.preferences.BOOKMARKTYPE
 import com.example.secondhiltapp.preferences.SortOrder
+import com.example.secondhiltapp.ui.gallery.GalleryViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
@@ -45,20 +46,31 @@ class HomeViewModel @Inject constructor(
             false,
             SortOrder.BY_NEWS
         )
+
         if (bookMarkData != null){
             saveBookmark(data)
         }
+
+
     }
 
     private fun saveBookmark(data: BookMarkData) = viewModelScope.launch {
-        bookmarkDao.insert(data)
-//        addEditTaskEventChannel.send(AddEditTaskEvent.NavigateBackWithResult(ADD_TASK_RESULT_OK))
-        addEditTaskEventChannel.send(AddEditTaskEvent.SaveBookmark("${data.title} is save"))
+        val isSave = bookmarkDao.getBookmark(data.title!!)
+        if (isSave == null){
+            bookmarkDao.insert(data)
+            addEditTaskEventChannel.send(AddEditTaskEvent.SaveBookmark("${data.title} is saved"))
+        }else{
+            addEditTaskEventChannel.send(AddEditTaskEvent.AlreadySaved("${data.title} is already saved"))
+        }
+//        bookmarkDao.insert(data)
+////        addEditTaskEventChannel.send(AddEditTaskEvent.NavigateBackWithResult(ADD_TASK_RESULT_OK))
+//        addEditTaskEventChannel.send(AddEditTaskEvent.SaveBookmark("${data.title} is save"))
     }
 
     sealed class AddEditTaskEvent {
 //        data class ShowInvalidInputMessage(val msg: String) : AddEditTaskEvent()
 //        data class NavigateBackWithResult(val result: Int) : AddEditTaskEvent()
         data class SaveBookmark(val msg: String) : AddEditTaskEvent()
+        data class AlreadySaved(val msg: String) : AddEditTaskEvent()
     }
 }
