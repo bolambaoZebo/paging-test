@@ -1,8 +1,6 @@
 package com.example.secondhiltapp.ui.home
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.secondhiltapp.data.RoomRepository
 import com.example.secondhiltapp.data.SoccerRepository
 import com.example.secondhiltapp.db.BookmarkDao
@@ -27,9 +25,17 @@ class HomeViewModel @Inject constructor(
     fun currentLang() = soccerRepository.getLanguageNow()
     val soccerData = soccerRepository.getSoccerNews().asLiveData()
 
+    var sliderImageUrl = mutableListOf<String>(
+        "https://soccer-news.s3.ap-southeast-1.amazonaws.com/uno.png",
+        "https://soccer-news.s3.ap-southeast-1.amazonaws.com/dos.png",
+        "https://soccer-news.s3.ap-southeast-1.amazonaws.com/tres.png",
+        "https://soccer-news.s3.ap-southeast-1.amazonaws.com/tres.png"
+    )
     private val addEditTaskEventChannel = Channel<AddEditTaskEvent>()
     val addEditTaskEvent = addEditTaskEventChannel.receiveAsFlow()
 
+
+    //METHODS
     fun onSaveNews(bookMarkData: SoccerNews){
         var data = BookMarkData(
             bookMarkData.id,
@@ -62,9 +68,6 @@ class HomeViewModel @Inject constructor(
         }else{
             addEditTaskEventChannel.send(AddEditTaskEvent.AlreadySaved("${data.title} is already saved"))
         }
-//        bookmarkDao.insert(data)
-////        addEditTaskEventChannel.send(AddEditTaskEvent.NavigateBackWithResult(ADD_TASK_RESULT_OK))
-//        addEditTaskEventChannel.send(AddEditTaskEvent.SaveBookmark("${data.title} is save"))
     }
 
     sealed class AddEditTaskEvent {

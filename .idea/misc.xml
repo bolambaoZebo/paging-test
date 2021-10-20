@@ -11,12 +11,14 @@
         <entry key="app/src/main/res/drawable/ic_search.xml" value="0.12685185185185185" />
         <entry key="app/src/main/res/drawable/ic_sort.xml" value="0.321875" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_score_details_fragment.xml" value="0.40942028985507245" />
         <entry key="app/src/main/res/layout/bookmark_fragment.xml" value="0.30846223839854414" />
         <entry key="app/src/main/res/layout/fragment_details.xml" value="0.25253292806484295" />
         <entry key="app/src/main/res/layout/fragment_details_news.xml" value="0.14994934143870314" />
         <entry key="app/src/main/res/layout/fragment_gallery.xml" value="0.45" />
-        <entry key="app/src/main/res/layout/home_fragment.xml" value="0.16304347826086957" />
+        <entry key="app/src/main/res/layout/home_fragment.xml" value="0.19786096256684493" />
         <entry key="app/src/main/res/layout/item_bookmark.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/item_home_slider.xml" value="0.30833333333333335" />
         <entry key="app/src/main/res/layout/item_soccer_news.xml" value="0.2767210144927536" />
         <entry key="app/src/main/res/layout/item_unsplash_photo.xml" value="0.335" />
         <entry key="app/src/main/res/layout/unsplash_video_load_state_footer.xml" value="0.25253292806484295" />

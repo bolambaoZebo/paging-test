@@ -5,8 +5,8 @@
 
     >
     <item
-        android:id="@+id/sorting"
-        android:icon="@drawable/ic_sort"
+        android:id="@+id/action_score"
+        android:icon="@drawable/ic_baseline_score_24"
         android:title="Sort"
         app:showAsAction="always"
         >

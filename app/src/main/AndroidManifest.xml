@@ -14,11 +14,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SecondHiltApp">
         <activity
+            android:name=".ui.details.ScoreDetailsFragment"
+            android:exported="true" />
+        <activity
             android:name=".SplashScreen"
-            android:theme="@style/SplashScreenBackground"
             android:exported="true"
             android:screenOrientation="portrait"
-            >
+            android:theme="@style/SplashScreenBackground">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,8 +30,8 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:screenOrientation="portrait"
-            />
+            android:screenOrientation="portrait" />
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

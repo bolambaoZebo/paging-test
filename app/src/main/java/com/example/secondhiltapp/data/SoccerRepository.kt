@@ -7,6 +7,7 @@ import androidx.paging.liveData
 import com.example.secondhiltapp.api.network.ApiSoccer
 import com.example.secondhiltapp.db.AppRoom
 import com.example.secondhiltapp.db.entity.IsClickable
+import kotlinx.coroutines.flow.filter
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -27,4 +28,6 @@ class SoccerRepository @Inject constructor(
         ).liveData
 
     fun getIsActive() = if (db.getIsActiveDao().getIsActive() != null) db.getIsActiveDao().getIsActive() else null
+
+
 }

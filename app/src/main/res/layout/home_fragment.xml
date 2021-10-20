@@ -1,57 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_home_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.HomeFragment"
-    android:id="@+id/root_home_layout"
-    >
+    tools:context=".ui.home.HomeFragment">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        >
+        app:layout_constraintTop_toTopOf="parent">
 
-        <RelativeLayout
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/homeRecyclerView"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:listitem="@layout/item_soccer_news" />
+                android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/text_view_error"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_above="@id/button_retry"
-                android:layout_margin="8dp"
-                android:gravity="center_horizontal"
-                android:visibility="gone"
-                tools:text="An error occurred"
-                tools:visibility="visible" />
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/home_view_pager"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginEnd="0dp"
+                    android:visibility="gone"/>
 
-            <Button
-                android:id="@+id/button_retry"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="@string/retry"
-                android:visibility="gone"
-                tools:visibility="visible" />
+                <LinearLayout
+                    android:id="@+id/home_pager_dots"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_alignBottom="@+id/home_view_pager"
+                    android:layout_marginBottom="0dp"
+                    android:background="@color/dot_background"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    />
 
-        </RelativeLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/homeRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/home_view_pager"
+                    tools:listitem="@layout/item_soccer_news" />
+
+                <TextView
+                    android:id="@+id/text_view_error"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@id/button_retry"
+                    android:layout_margin="8dp"
+                    android:gravity="center_horizontal"
+                    android:visibility="gone"
+                    tools:text="An error occurred"
+                    tools:visibility="visible" />
+
+                <Button
+                    android:id="@+id/button_retry"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="@string/retry"
+                    android:visibility="gone"
+                    tools:visibility="visible" />
+
+            </RelativeLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

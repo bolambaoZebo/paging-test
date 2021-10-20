@@ -1,5 +1,6 @@
 package com.example.secondhiltapp.db
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -18,7 +19,6 @@ interface SoccerDao{
 
     @Query("SELECT * FROM soccer_news")
     fun getSoccer() : Flow<List<SoccerNews>>
-
 
 
 //    LiveData<List<SoccerNews>>

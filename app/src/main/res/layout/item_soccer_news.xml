@@ -48,7 +48,8 @@
                         android:layout_weight="1"
                         android:text="UK how"
                         android:textSize="24sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        />
 
                     <LinearLayout
                         android:id="@+id/save_post"
@@ -96,11 +97,13 @@
                         android:layout_alignParentStart="true"
                         android:lineSpacingMultiplier="0.8"
                         android:text="Don't miss the exciting event this weekend"
-                        android:textSize="14sp"
+                        android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:lineSpacingExtra="8dp"
+                        />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </RelativeLayout>

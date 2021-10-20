@@ -40,6 +40,6 @@ class NewsDetailsFragment : Fragment(R.layout.fragment_details_news) {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         menu!!.findItem(R.id.language_icon).isVisible = false
-        menu!!.findItem(R.id.sorting).isVisible = false
+        menu!!.findItem(R.id.action_score).isVisible = false
     }
 }

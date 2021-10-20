@@ -20,31 +20,17 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.secondhiltapp.databinding.ActivityMainBinding
 import com.example.secondhiltapp.db.entity.LanguageData
-import com.example.secondhiltapp.ui.gallery.GalleryFragment
-import com.example.secondhiltapp.utils.snackbar
-import com.google.android.material.snackbar.Snackbar
+import com.example.secondhiltapp.ui.details.ScoreDetailsFragment
+import com.google.android.material.appbar.AppBarLayout
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
-import org.intellij.lang.annotations.Language
 import java.util.*
-import com.google.android.material.appbar.AppBarLayout
-import com.google.android.material.appbar.AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS
-
-import com.google.android.material.appbar.AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL
-
-
-
-
-
-
 
 const val LOCAL_ENGLISH = "en"
 const val LOCAL_CHINESE = "zh"
 
-
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity()
-{
+class MainActivity : AppCompatActivity() {
 
     private val mainViewModel by viewModels<MainViewModel>()
     private lateinit var binding: ActivityMainBinding
@@ -66,7 +52,6 @@ class MainActivity : AppCompatActivity()
         }
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
         navController = navHostFragment.findNavController()
-
 
         val appBarConfiguration = AppBarConfiguration(
             setOf(
@@ -137,6 +122,11 @@ class MainActivity : AppCompatActivity()
         }
         if (id == R.id.action_chinese){
             mainViewModel.setLanguage(LanguageData(LOCAL_CHINESE))
+        }
+        if (id == R.id.action_score){
+            Intent(this, ScoreDetailsFragment::class.java).apply {
+                startActivity(this)
+            }
         }
 
         return super.onOptionsItemSelected(item)

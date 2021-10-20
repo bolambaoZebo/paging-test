@@ -11,7 +11,6 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.secondhiltapp.R
 import com.example.secondhiltapp.data.SoccerVideos
 import com.example.secondhiltapp.databinding.ItemUnsplashPhotoBinding
-import com.example.secondhiltapp.db.entity.BookMarkData
 
 class SoccerVideoAdapter(
     private val listener: OnItemClickListener,

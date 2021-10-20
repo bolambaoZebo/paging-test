@@ -1,12 +1,9 @@
 package com.example.secondhiltapp.ui.gallery
 
-
 import android.os.Bundle
-import android.view.Gravity
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
-import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -14,15 +11,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
-import com.example.secondhiltapp.MainActivity
 import com.example.secondhiltapp.R
 import com.example.secondhiltapp.data.SoccerVideos
 import com.example.secondhiltapp.databinding.FragmentGalleryBinding
 import com.example.secondhiltapp.utils.snackBar
 import com.example.secondhiltapp.utils.snackbar
-import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_details.*
 import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
@@ -121,7 +115,7 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery),
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         menu!!.findItem(R.id.language_icon).isVisible = false
-        menu!!.findItem(R.id.sorting).isVisible = false
+        menu!!.findItem(R.id.action_score).isVisible = false
     }
 
 }
