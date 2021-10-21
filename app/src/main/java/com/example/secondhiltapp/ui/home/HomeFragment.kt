@@ -19,6 +19,7 @@ import com.example.secondhiltapp.R
 import com.example.secondhiltapp.databinding.HomeFragmentBinding
 import com.example.secondhiltapp.db.entity.SoccerNews
 import com.example.secondhiltapp.ui.home.adapter.HomeSliderAdapter
+import com.example.secondhiltapp.utils.Resource
 import com.example.secondhiltapp.utils.snackBar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
@@ -61,15 +62,13 @@ class HomeFragment : Fragment(R.layout.home_fragment),
 
         homeAdapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
 
+
         initialViewSetup()
         populateView()
         sliderPopulate()
 
         dots = arrayOfNulls<TextView>(viewModel.sliderImageUrl.size)
 
-        refreshLayout.setOnRefreshListener {
-            refreshLayout.isRefreshing = false
-        }
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.addEditTaskEvent.collect { event ->
@@ -83,14 +82,37 @@ class HomeFragment : Fragment(R.layout.home_fragment),
                 }
             }
         }
+
+
     }
 
     private fun populateView() {
-        viewModel.soccerData.observe(viewLifecycleOwner) {
-            it.data?.let { it1 ->
-                refreshLayout.isRefreshing = false
-                homeAdapter.setHomeData(it1)
-                sliderAdapter.setupList(it1)
+//        viewModel.soccerData.observe(viewLifecycleOwner) {
+//            it.data?.let { it1 ->
+//                refreshLayout.isRefreshing = false
+//                homeAdapter.setHomeData(it1)
+//                sliderAdapter.setupList(it1)
+//            }
+//        }
+
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel.soccerData.collect {
+                val result = it ?: return@collect
+
+                refreshLayout.setOnRefreshListener {
+                    refreshLayout.isRefreshing = result is Resource.Loading
+                }
+                refreshLayout.isRefreshing = result is Resource.Loading
+                binding?.apply {
+                    homePagerDots.isVisible = !result.data.isNullOrEmpty() //is Resource.Success
+                    homeViewPager.isVisible = !result.data.isNullOrEmpty() //is Resource.Success
+                    textViewError.isVisible = result.error != null || result.data.isNullOrEmpty()
+                    buttonRetry.isVisible = result.error != null || result.data.isNullOrEmpty()
+                }
+                result.data?.let { it1 ->
+                    homeAdapter.setHomeData(it1)
+                    sliderAdapter.setupList(it1)
+                }
             }
         }
 

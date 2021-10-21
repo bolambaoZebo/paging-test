@@ -11,7 +11,10 @@ import com.example.secondhiltapp.preferences.SortOrder
 import com.example.secondhiltapp.ui.gallery.GalleryViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.cache
 import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -23,7 +26,7 @@ class HomeViewModel @Inject constructor(
 ) : ViewModel() {
 
     fun currentLang() = soccerRepository.getLanguageNow()
-    val soccerData = soccerRepository.getSoccerNews().asLiveData()
+    val soccerData = soccerRepository.getSoccerNews().stateIn(viewModelScope, SharingStarted.Lazily, null )//.asLiveData()
 
     var sliderImageUrl = mutableListOf<String>(
         "https://soccer-news.s3.ap-southeast-1.amazonaws.com/uno.png",

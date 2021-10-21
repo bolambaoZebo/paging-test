@@ -17,6 +17,7 @@ import com.example.secondhiltapp.databinding.FragmentGalleryBinding
 import com.example.secondhiltapp.utils.snackBar
 import com.example.secondhiltapp.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_details.*
 import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
@@ -74,6 +75,7 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery),
         adapter.addLoadStateListener { loadState ->
             binding.apply {
                 progressBar.isVisible = loadState.source.refresh is LoadState.Loading
+//                swipeRefreshLayout.isRefreshing = loadState.source.refresh is LoadState.Loading
 //                swipeRefreshLayout.setOnRefreshListener {
 //                    swipeRefreshLayout.isRefreshing = loadState.source.refresh is LoadState.Loading
 //                }

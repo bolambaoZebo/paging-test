@@ -9,9 +9,12 @@ import com.example.secondhiltapp.api.network.SafeCallRequest
 import com.example.secondhiltapp.db.AppRoom
 import com.example.secondhiltapp.db.entity.IsClickable
 import com.example.secondhiltapp.db.entity.LanguageData
+import com.example.secondhiltapp.db.entity.SoccerNews
+import com.example.secondhiltapp.utils.Resource
 import com.example.secondhiltapp.utils.networkBoundResource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import java.lang.Exception
 import javax.inject.Inject
@@ -28,7 +31,8 @@ class RoomRepository @Inject constructor(
 
     private var _lang = MutableLiveData<LanguageData>()
 
-    fun getSoccerNews() = networkBoundResource(
+    fun getSoccerNews() : Flow<Resource<List<SoccerNews>>> =
+        networkBoundResource(
         query = {
             soccerDao.getSoccer()
         },

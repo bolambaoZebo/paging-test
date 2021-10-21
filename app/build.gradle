@@ -14,13 +14,10 @@ android {
         applicationId "com.weiboSportsPro.secondhiltapp"
         minSdk 23
         targetSdk 30
-        versionCode 1
-        versionName "1.0"
+        versionCode 5
+        versionName "1.5"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
-        buildConfigField("String", "UNSPLASH_ACCESS_KEY", unsplash_access_key)
-
 
     }
 
@@ -41,6 +38,18 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+
+    bundle {
+        language {
+            enableSplit = false
+        }
+        density {
+            enableSplit = true
+        }
+        abi {
+            enableSplit = true
+        }
     }
 }
 
