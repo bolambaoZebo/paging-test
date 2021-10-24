@@ -43,6 +43,6 @@ class UnsplashPagingSource(
     }
 
     override fun getRefreshKey(state: PagingState<Int, SoccerVideos>): Int? {
-        TODO("Not yet implemented")
+        return 0
     }
 }

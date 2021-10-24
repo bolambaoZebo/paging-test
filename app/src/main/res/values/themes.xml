@@ -12,18 +12,27 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="snackbarTextViewStyle">@style/SnackBarText</item>
+        <item name="snackbarButtonStyle">@color/purple_700</item>
         <item name="snackbarStyle">@style/MySnackbar</item>
 
-        <item name="android:textColor">#666666</item>
+        <item name="android:textColor">@color/purple_700</item>
+
     </style>
 
     <style name="SplashScreenBackground" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:windowFullscreen">true</item>
     </style>
 
-    <style name="MySnackbar" parent="Widget.MaterialComponents.Snackbar">
+    <style name="MySnackbar" parent="Widget.MaterialComponents.Snackbar.FullWidth">
         <item name="android:layout_margin">0dp</item>
         <item name="cornerRadius">0dp</item>
+        <item name="actionTextColorAlpha">1.0</item>
+        <item name="android:background">@drawable/snackbar_background</item>
+    </style>
+
+    <style name="SnackBarText" parent="Widget.MaterialComponents.Snackbar.TextView">
+        <item name="android:textColor">@color/white</item>
     </style>
 
 </resources>

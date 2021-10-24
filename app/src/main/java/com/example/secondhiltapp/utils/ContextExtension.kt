@@ -5,9 +5,10 @@ import android.content.Context
 import com.example.secondhiltapp.R
 import com.google.android.material.snackbar.Snackbar
 
-fun Context.snackBar(msg: String, activity: Activity){
+fun Context.snackBar(msg: String,activity: Activity, save: Boolean = true){
     Snackbar.make(activity.findViewById(R.id.bottom_nav), msg, Snackbar.LENGTH_LONG).apply {
-    }
-        .setAction("OK"){}
-        .show()
+        if (save){
+            this.setAction("OK"){}
+        }
+    }.show()
 }

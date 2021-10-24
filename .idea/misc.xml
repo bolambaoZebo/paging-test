@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../../../../layout/custom_preview.xml" value="0.3234375" />
         <entry key="app/src/main/res/drawable/gradient.xml" value="0.335" />
         <entry key="app/src/main/res/drawable/ic_baseline_highlight_24.xml" value="0.31296296296296294" />
         <entry key="app/src/main/res/drawable/ic_baseline_language_24.xml" value="0.4722222222222222" />
@@ -10,6 +11,7 @@
         <entry key="app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.4" />
         <entry key="app/src/main/res/drawable/ic_search.xml" value="0.12685185185185185" />
         <entry key="app/src/main/res/drawable/ic_sort.xml" value="0.321875" />
+        <entry key="app/src/main/res/drawable/snackbar_background.xml" value="0.3194444444444444" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_score_details_fragment.xml" value="0.40942028985507245" />
         <entry key="app/src/main/res/layout/bookmark_fragment.xml" value="0.30846223839854414" />

@@ -77,7 +77,7 @@ class HomeFragment : Fragment(R.layout.home_fragment),
                         requireActivity().snackBar(event.msg, requireActivity())
                     }
                     is HomeViewModel.AddEditTaskEvent.AlreadySaved -> {
-                        requireActivity().snackBar(event.msg, requireActivity())
+                        requireActivity().snackBar(event.msg, requireActivity(),false)
                     }
                 }
             }
@@ -87,13 +87,6 @@ class HomeFragment : Fragment(R.layout.home_fragment),
     }
 
     private fun populateView() {
-//        viewModel.soccerData.observe(viewLifecycleOwner) {
-//            it.data?.let { it1 ->
-//                refreshLayout.isRefreshing = false
-//                homeAdapter.setHomeData(it1)
-//                sliderAdapter.setupList(it1)
-//            }
-//        }
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.soccerData.collect {

@@ -1,12 +1,17 @@
 package com.example.secondhiltapp.utils
 
+import android.annotation.SuppressLint
+import android.graphics.Color
 import android.view.Gravity
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.widget.SearchView
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.secondhiltapp.R
+import com.example.secondhiltapp.R.color
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 
@@ -27,13 +32,18 @@ fun RecyclerView.hide(){
     visibility = View.GONE
 }
 
-fun View.snackbar(message: String){
-    Snackbar.make(this, message, Snackbar.LENGTH_LONG).also { snackbar ->
-        snackbar.setAction(resources.getString(R.string.ok)){
-            snackbar.dismiss()
-        }
-    }.show()
-}
+//@SuppressLint("ResourceAsColor")
+//fun View.snackbar(message: String, save: Boolean = true){
+//
+//    val snackbarView =  Snackbar.make(this, message, Snackbar.LENGTH_LONG).also { snackbar ->
+//        if(save){
+//            snackbar.setAction(resources.getString(R.string.ok)){
+//                snackbar.dismiss()
+//            }
+//        }
+//    }
+//    snackbarView.show()
+//}
 
 fun ImageView.show(){
     visibility = View.VISIBLE

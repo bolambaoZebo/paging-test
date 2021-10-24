@@ -24,7 +24,7 @@
             app:layout_scrollFlags="scroll|enterAlways"
             app:menu="@menu/menu_toolbar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:titleTextColor="@color/purple_700" />
+            />
 
     </com.google.android.material.appbar.AppBarLayout>
 

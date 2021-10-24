@@ -8,17 +8,31 @@
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_200</item>
-        <item name="colorOnSecondary">#171616</item>
+        <item name="colorOnSecondary">@color/white</item>
+
+        <item name="android:textColor">#D6D6D6</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-
-        <item name="android:textColor">#FFFFFF</item>
+        <item name="snackbarTextViewStyle">@style/SnackBarText</item>
+        <item name="snackbarButtonStyle">@color/purple_700</item>
+        <item name="snackbarStyle">@style/MySnackbar</item>
     </style>
 
-    <style name="MySnackbar" parent="Widget.MaterialComponents.Snackbar">
+    <style name="MySnackbar" parent="Widget.MaterialComponents.Snackbar.FullWidth">
         <item name="android:layout_margin">0dp</item>
         <item name="cornerRadius">0dp</item>
+        <item name="android:background">@drawable/snackbar_background</item>
+        <item name="animationMode">slide</item>
+    </style>
+
+    <style name="SnackBarText" parent="Widget.MaterialComponents.Snackbar.TextView">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="snackbar_button" parent="@style/Widget.MaterialComponents.Button.TextButton.Snackbar">
+        <item name="backgroundTint">@color/purple_500</item>
+        <item name="android:textColor">@color/purple_700</item>
     </style>
 
 </resources>

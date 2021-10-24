@@ -11,13 +11,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.secondhiltapp.R
 import com.example.secondhiltapp.data.SoccerVideos
 import com.example.secondhiltapp.databinding.FragmentGalleryBinding
+import com.example.secondhiltapp.utils.Resource
 import com.example.secondhiltapp.utils.snackBar
-import com.example.secondhiltapp.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_details.*
 import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
@@ -29,6 +29,8 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery),
 
     private var _binding: FragmentGalleryBinding? = null
     private val binding get() = _binding!!
+
+    lateinit var refreshLayout: SwipeRefreshLayout
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -47,8 +49,31 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery),
                 header = SoccerVideoLoadStateAdapter { adapter.refresh()},
                 footer = SoccerVideoLoadStateAdapter { adapter.refresh()}
             )
-            buttonRetry.setOnClickListener {
-                adapter.retry()
+
+            refreshLayout = refreshVideo
+
+            buttonRetry.setOnClickListener { adapter.retry()}
+            refreshLayout.setOnRefreshListener {
+                refreshLayout.isRefreshing = false
+                //adapter.refresh()
+            }
+        }
+
+        adapter.addLoadStateListener { loadState ->
+            binding.apply {
+                refreshLayout.isRefreshing = loadState.refresh is LoadState.Loading
+                recyclerView.isVisible = loadState.source.refresh is LoadState.NotLoading
+                buttonRetry.isVisible = loadState.source.refresh is LoadState.Error
+                textViewError.isVisible = loadState.source.refresh is LoadState.Error
+
+                if(loadState.source.refresh is LoadState.NotLoading &&
+                    loadState.append.endOfPaginationReached &&
+                    adapter.itemCount < 1){
+                    recyclerView.isVisible = false
+                    textViewEmpty.isVisible = true
+                }else{
+                    textViewEmpty.isVisible = false
+                }
             }
         }
 
@@ -65,38 +90,14 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery),
                        requireActivity().snackBar(video.data, requireActivity())
                     }
                     is GalleryViewModel.GalleryEvents.AllreadySaveHighlights -> {
-                        requireActivity().snackBar(video.data, requireActivity())
+                        requireActivity().snackBar(video.data, requireActivity(),false)
                     }
                 }
             }
         }
 
-
-        adapter.addLoadStateListener { loadState ->
-            binding.apply {
-                progressBar.isVisible = loadState.source.refresh is LoadState.Loading
-//                swipeRefreshLayout.isRefreshing = loadState.source.refresh is LoadState.Loading
-//                swipeRefreshLayout.setOnRefreshListener {
-//                    swipeRefreshLayout.isRefreshing = loadState.source.refresh is LoadState.Loading
-//                }
-                recyclerView.isVisible = loadState.source.refresh is LoadState.NotLoading
-                buttonRetry.isVisible = loadState.source.refresh is LoadState.Error
-                textViewError.isVisible = loadState.source.refresh is LoadState.Error
-
-                //empty view
-                if(loadState.source.refresh is LoadState.NotLoading &&
-                        loadState.append.endOfPaginationReached &&
-                        adapter.itemCount < 1){
-                    recyclerView.isVisible = false
-                    textViewEmpty.isVisible = true
-                }else{
-                    textViewEmpty.isVisible = false
-                }
-
-            }
-        }
-
         setHasOptionsMenu(true)
+
     }
     override fun onItemClicked(video: SoccerVideos) {
         val action = GalleryFragmentDirections.actionGalleryFragmentToDetailsFragment(video.video!!)
@@ -104,7 +105,7 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery),
             if (it != null && it.isActive == true){
                 findNavController().navigate(action)
             }else{
-                binding.rootGalleryLayout.snackbar(resources.getString(R.string.thank_you_for_visiting))
+                requireActivity().snackBar(resources.getString(R.string.thank_you_for_visiting), requireActivity())
             }
         }
     }
