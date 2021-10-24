@@ -26,7 +26,7 @@ class HomeSliderAdapter(
                     .centerCrop()
                     .transition(DrawableTransitionOptions.withCrossFade())
                     .error(R.drawable.ic_error)
-                    .placeholder(R.drawable.ic_baseline_image_24)
+                    .placeholder(R.drawable.ic_baseline_image_search_24)
                     .into(homeItemImageSlider)
 
                 homeItemImageSlider.setOnClickListener {

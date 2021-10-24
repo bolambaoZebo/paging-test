@@ -101,7 +101,7 @@ class BookmarkFragment : Fragment(R.layout.bookmark_fragment), BookmarkAdapter.O
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_bookmarks, menu)
         menu!!.findItem(R.id.language_icon).isVisible = false
-        menu!!.findItem(R.id.action_score).isVisible = false
+//        menu!!.findItem(R.id.action_score).isVisible = false
 
         val searchItem = menu.findItem(R.id.action_search)
         searchView = searchItem.actionView as SearchView

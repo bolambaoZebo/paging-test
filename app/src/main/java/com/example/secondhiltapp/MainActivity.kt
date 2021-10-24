@@ -9,9 +9,9 @@ import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -21,7 +21,6 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.secondhiltapp.databinding.ActivityMainBinding
 import com.example.secondhiltapp.db.entity.LanguageData
-import com.example.secondhiltapp.ui.details.ScoreDetailsFragment
 import com.google.android.material.appbar.AppBarLayout
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
@@ -62,6 +61,7 @@ class MainActivity : AppCompatActivity() {
             setOf(
                 R.id.homeFragment,
                 R.id.galleryFragment,
+                R.id.statsFragment,
                 R.id.bookmarkFragment
             )
         )
@@ -77,6 +77,10 @@ class MainActivity : AppCompatActivity() {
                     return@setOnItemSelectedListener true
                 }
                 R.id.galleryFragment -> {
+                    isNotReselected(item.itemId, navController.currentDestination?.id)
+                    return@setOnItemSelectedListener true
+                }
+                R.id.statsFragment -> {
                     isNotReselected(item.itemId, navController.currentDestination?.id)
                     return@setOnItemSelectedListener true
                 }
@@ -128,11 +132,11 @@ class MainActivity : AppCompatActivity() {
         if (id == R.id.action_chinese){
             mainViewModel.setLanguage(LanguageData(LOCAL_CHINESE))
         }
-        if (id == R.id.action_score){
-            Intent(this, ScoreDetailsFragment::class.java).apply {
-                startActivity(this)
-            }
-        }
+//        if (id == R.id.action_score){
+//            Intent(this, StatsFragment::class.java).apply {
+//                startActivity(this)
+//            }
+//        }
 
         return super.onOptionsItemSelected(item)
     }

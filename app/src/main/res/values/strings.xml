@@ -55,5 +55,6 @@
 
     <string name="ok">OK</string>
     <string name="powered_by_scorebat_com">Powered by Scorebat.com</string>
+    <string name="stats">Stats</string>
 
 </resources>

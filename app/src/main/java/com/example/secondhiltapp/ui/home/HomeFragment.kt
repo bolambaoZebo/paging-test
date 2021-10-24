@@ -4,6 +4,7 @@ import android.os.Build
 import android.os.Bundle
 import android.text.Html
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -11,6 +12,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -24,6 +26,7 @@ import com.example.secondhiltapp.utils.snackBar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
+import org.w3c.dom.Text
 
 @AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.home_fragment), 
@@ -99,8 +102,8 @@ class HomeFragment : Fragment(R.layout.home_fragment),
                 binding?.apply {
                     homePagerDots.isVisible = !result.data.isNullOrEmpty() //is Resource.Success
                     homeViewPager.isVisible = !result.data.isNullOrEmpty() //is Resource.Success
-                    textViewError.isVisible = result.error != null || result.data.isNullOrEmpty()
-                    buttonRetry.isVisible = result.error != null || result.data.isNullOrEmpty()
+                    textViewError.isVisible = result.error != null && result.data.isNullOrEmpty()
+                    buttonRetry.isVisible = result.error != null && result.data.isNullOrEmpty()
                 }
                 result.data?.let { it1 ->
                     homeAdapter.setHomeData(it1)
@@ -181,7 +184,7 @@ class HomeFragment : Fragment(R.layout.home_fragment),
     }
 
     override fun onSliderImageClicked(imageUrl: String) {
-        Toast.makeText(requireContext(), imageUrl, Toast.LENGTH_SHORT).show()
+        //Toast.makeText(requireContext(), imageUrl, Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroy() {

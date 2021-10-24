@@ -2,17 +2,7 @@
 <menu
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-
     >
-    <item
-        android:id="@+id/action_score"
-        android:icon="@drawable/ic_baseline_score_24"
-        android:title="Sort"
-        app:showAsAction="always"
-        >
-
-    </item>
-
         <item
             android:id="@+id/language_icon"
             android:icon="@drawable/ic_baseline_language_24"
@@ -33,4 +23,13 @@
 
 
 </menu>
+
+<!--<item-->
+<!--android:id="@+id/action_score"-->
+<!--android:icon="@drawable/ic_baseline_score_24"-->
+<!--android:title="Sort"-->
+<!--app:showAsAction="always"-->
+<!--    >-->
+
+<!--</item>-->
 

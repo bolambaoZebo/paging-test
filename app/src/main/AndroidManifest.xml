@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SecondHiltApp">
         <activity
-            android:name=".ui.details.ScoreDetailsFragment"
+            android:name=".ui.stats.StatsFragment"
             android:exported="true" />
         <activity
             android:name=".SplashScreen"

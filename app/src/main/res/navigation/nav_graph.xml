@@ -132,4 +132,10 @@
             app:argType="string" />
     </fragment>
 
+    <fragment
+        android:id="@+id/statsFragment"
+        android:name="com.example.secondhiltapp.ui.stats.StatsFragment"
+        android:label="@string/stats"
+        tools:layout="@layout/stats_fragment" />
+
 </navigation>

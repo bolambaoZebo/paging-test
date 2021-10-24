@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <color name="purple_200">#000000</color>
-    <color name="purple_500">#F0A500</color>
+    <color name="purple_500">#6e25bc</color>
     <color name="purple_700">#082032</color>
     <color name="teal_200">#082032</color>
     <color name="teal_700">#334756</color>

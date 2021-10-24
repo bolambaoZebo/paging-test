@@ -50,4 +50,5 @@
     <string name="thank_you_for_visiting">" 谢谢你的拜访。"</string>
     <string name="ok">好的</string>
     <string name="powered_by_scorebat_com">由 Scorebat.com 提供支持</string>
+    <string name="stats">统计数据</string>
 </resources>

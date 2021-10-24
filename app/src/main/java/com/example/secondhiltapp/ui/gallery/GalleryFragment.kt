@@ -55,7 +55,7 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery),
             buttonRetry.setOnClickListener { adapter.retry()}
             refreshLayout.setOnRefreshListener {
                 refreshLayout.isRefreshing = false
-                //adapter.refresh()
+                adapter.retry()
             }
         }
 
@@ -118,40 +118,10 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery),
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         menu!!.findItem(R.id.language_icon).isVisible = false
-        menu!!.findItem(R.id.action_score).isVisible = false
     }
 
 }
 
-
-
-//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-//        super.onCreateOptionsMenu(menu, inflater)
-//
-//        inflater.inflate(R.menu.menu_gallery, menu)
-//
-//        val searchItem = menu.findItem(R.id.action_search)
-//        val searchView = searchItem.actionView as SearchView
-//
-//        searchView.setOnQueryTextListener( object : SearchView.OnQueryTextListener {
-//            override fun onQueryTextSubmit(query: String?): Boolean {
-//
-//                if (query != null) {
-//                    binding.recyclerView.scrollToPosition(0)
-//                    viewModel.searchPhotos(query)
-//                    searchView.clearFocus()
-//                }
-//
-//                return true
-//
-//            }
-//
-//            override fun onQueryTextChange(newText: String?): Boolean {
-//                return true
-//            }
-//
-//        })
-//    }
 
 
 

@@ -14,9 +14,17 @@
         android:title="@string/title_search_news" />
 
     <item
+        android:id="@+id/statsFragment"
+        android:icon="@drawable/ic_baseline_score_24"
+        android:menuCategory="secondary"
+        android:title="@string/stats"
+        />
+
+    <item
         android:id="@+id/bookmarkFragment"
         android:icon="@drawable/ic_bookmarks"
         android:menuCategory="secondary"
         android:title="@string/title_bookmarks" />
+
 
 </menu>
