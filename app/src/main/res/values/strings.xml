@@ -40,8 +40,6 @@
     <string name="sort_by_date_created">Sort by date</string>
     <string name="delete_all">Delete all</string>
     <string name="is_save">is save</string>
-    <string name="click_the_video_to_un_mute">Click the video to un-mute</string>
-    <string name="click_here">Click here</string>
     <string name="highlights_video">"Highlights "</string>
     <string name="news_text">News</string>
     <string name="instructions_bookmark">Note: click save post or save highlight in the home and highlights tabs to save here.</string>
@@ -56,5 +54,9 @@
     <string name="ok">OK</string>
     <string name="powered_by_scorebat_com">Powered by Scorebat.com</string>
     <string name="stats">Stats</string>
+    <string name="highlights_fragment">Highlights</string>
+    <string name="news_fragment">News</string>
+    <string name="click_video_to_un_mute">Click video to un-mute</string>
+    <string name="click_here">Click here</string>
 
 </resources>
