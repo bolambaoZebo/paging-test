@@ -24,7 +24,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
-class BookmarkFragment : Fragment(R.layout.bookmark_fragment), BookmarkAdapter.OnItemBookmarkClick {
+class BookmarkFragment(
+    private val listener: NavigateToFragment
+) : Fragment(R.layout.bookmark_fragment), BookmarkAdapter.OnItemBookmarkClick {
 
     private val viewModel by viewModels<BookmarkViewModel>()
 
@@ -64,6 +66,22 @@ class BookmarkFragment : Fragment(R.layout.bookmark_fragment), BookmarkAdapter.O
                 }
             }).attachToRecyclerView(bookmarkRecyclerView)
 
+//            viewModel.bookmark.observe(viewLifecycleOwner) {
+//                bookmarkAdapter.submitList(it)
+//            }
+
+            viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+                viewModel.bookmark.collect {
+                    val bookmarks = it ?: return@collect
+
+                    bookmarkAdapter.submitList(it)
+
+//                    bookmarksAdapter.submitList(bookmarks)
+//                    textViewNoBookmarks.isVisible = bookmarks.isEmpty()
+//                    recyclerView.isVisible = bookmarks.isNotEmpty()
+                }
+            }
+
         }
 
         viewLifecycleOwner.lifecycleScope.launchWhenCreated {
@@ -84,9 +102,7 @@ class BookmarkFragment : Fragment(R.layout.bookmark_fragment), BookmarkAdapter.O
             }
         }
 
-        viewModel.bookmark.observe(viewLifecycleOwner) {
-            bookmarkAdapter.submitList(it)
-        }
+
 
         viewModel.currentLang().observe(viewLifecycleOwner) {
             if (it != null){
@@ -148,27 +164,14 @@ class BookmarkFragment : Fragment(R.layout.bookmark_fragment), BookmarkAdapter.O
         _binding = null
     }
 
+    interface NavigateToFragment {
+        fun bookmarkNavigateTo(bookmark: BookMarkData, lang: String)
+    }
+
     override fun onItemClick(bookmark: BookMarkData, lang: String) {
         viewModel.isActive?.observe(viewLifecycleOwner){
             if (it != null && it.isActive == true){
-                when(bookmark.type){
-                    SortOrder.BY_NEWS -> {
-                        val action =
-                            BookmarkFragmentDirections.actionBookmarkFragmentToNewsDetailsFragment(
-                                if (lang == LOCAL_ENGLISH)bookmark.title!! else bookmark.titleChinese!!,
-                                if (lang == LOCAL_ENGLISH)bookmark.description!! else bookmark.descriptionChinese!!,
-                                bookmark.imageUrl!!
-                            )
-                        findNavController().navigate(action)
-                    }
-                    SortOrder.BY_HIGHLIGHTS -> {
-                        val action =
-                            BookmarkFragmentDirections.actionBookmarkFragmentToDetailsFragment(
-                                bookmark.video!!
-                            )
-                        findNavController().navigate(action)
-                    }
-                }
+                listener.bookmarkNavigateTo(bookmark,lang)
             }else{
                 Snackbar.make(requireView(), resources.getString(R.string.thank_you_for_visiting), Snackbar.LENGTH_LONG)
                     .setAction(resources.getString(R.string.ok)){}

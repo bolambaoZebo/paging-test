@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.details.NewsDetailsFragment"
+    android:background="@color/white"
     >
 
     <androidx.core.widget.NestedScrollView

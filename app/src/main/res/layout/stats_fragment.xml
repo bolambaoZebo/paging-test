@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.stats.StatsFragment">
+    tools:context=".ui.stats.StatsFragment"
+    android:background="@color/white"
+    >
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -13,12 +15,12 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <WebView
                 android:id="@+id/score_webview"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 tools:ignore="WebViewLayout" />
             <TextView
                 android:id="@+id/powered_by_scorebat"
@@ -27,6 +29,7 @@
                 android:padding="5dp"
                 android:text="@string/powered_by_scorebat_com"
                 android:textSize="12dp"
+                android:layout_gravity="bottom"
                 />
         </LinearLayout>
 

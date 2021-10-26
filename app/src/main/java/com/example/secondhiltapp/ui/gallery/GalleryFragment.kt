@@ -6,6 +6,7 @@ import android.view.MenuInflater
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
@@ -15,13 +16,16 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.secondhiltapp.R
 import com.example.secondhiltapp.data.SoccerVideos
 import com.example.secondhiltapp.databinding.FragmentGalleryBinding
+import com.example.secondhiltapp.ui.details.DetailsFragment
 import com.example.secondhiltapp.utils.Resource
 import com.example.secondhiltapp.utils.snackBar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
-class GalleryFragment : Fragment(R.layout.fragment_gallery),
+class GalleryFragment(
+    private val listener: OnItemClicked
+) : Fragment(R.layout.fragment_gallery),
     SoccerVideoAdapter.OnItemClickListener
 {
 
@@ -31,6 +35,8 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery),
     private val binding get() = _binding!!
 
     lateinit var refreshLayout: SwipeRefreshLayout
+
+    private lateinit var detailsFragment: DetailsFragment
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -79,6 +85,7 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery),
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.photos.observe(viewLifecycleOwner, Observer {
+
                 adapter.submitData(viewLifecycleOwner.lifecycle, it)
             })
         }
@@ -103,7 +110,9 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery),
         val action = GalleryFragmentDirections.actionGalleryFragmentToDetailsFragment(video.video!!)
         viewModel.isActive?.observe(viewLifecycleOwner){
             if (it != null && it.isActive == true){
-                findNavController().navigate(action)
+                listener.onVideoClick(video)
+//                findNavController().navigate(action)
+
             }else{
                 requireActivity().snackBar(resources.getString(R.string.thank_you_for_visiting), requireActivity())
             }
@@ -117,7 +126,11 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery),
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        menu!!.findItem(R.id.language_icon).isVisible = false
+        menu.findItem(R.id.language_icon).isVisible = false
+    }
+
+    interface OnItemClicked {
+        fun onVideoClick(soccerVideos: SoccerVideos)
     }
 
 }

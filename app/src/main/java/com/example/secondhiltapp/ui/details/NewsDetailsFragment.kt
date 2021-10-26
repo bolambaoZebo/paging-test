@@ -6,11 +6,16 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.example.secondhiltapp.LOCAL_ENGLISH
 import com.example.secondhiltapp.R
 import com.example.secondhiltapp.databinding.FragmentDetailsNewsBinding
+import com.example.secondhiltapp.db.entity.BookMarkData
 
 
-class NewsDetailsFragment : Fragment(R.layout.fragment_details_news) {
+class NewsDetailsFragment(
+    private val bookMarkData: BookMarkData,
+    val l: String
+) : Fragment(R.layout.fragment_details_news) {
 
     private val args by navArgs<NewsDetailsFragmentArgs>()
 
@@ -24,14 +29,14 @@ class NewsDetailsFragment : Fragment(R.layout.fragment_details_news) {
 
         binding.apply {
             Glide.with(this@NewsDetailsFragment)
-                .load(args.image)
+                .load(bookMarkData.imageUrl)
                 .centerCrop()
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .error(R.drawable.ic_error)
                 .into(newsDetailsImage)
 
-            newsTitle.text = args.newsText
-            newsDescription.text = args.newsTitle
+            newsTitle.text = if (l == LOCAL_ENGLISH)bookMarkData.title!! else bookMarkData.titleChinese!!//args.newsText
+            newsDescription.text =  if (l == LOCAL_ENGLISH)bookMarkData.description!! else bookMarkData.descriptionChinese!!//args.newsTitle
         }
 
         setHasOptionsMenu(true)

@@ -26,7 +26,7 @@ class HomeViewModel @Inject constructor(
 ) : ViewModel() {
 
     fun currentLang() = soccerRepository.getLanguageNow()
-    val soccerData = soccerRepository.getSoccerNews().stateIn(viewModelScope, SharingStarted.Lazily, null )//.asLiveData()
+    val soccerData = soccerRepository.getSoccerNews().stateIn(viewModelScope, SharingStarted.Lazily, null )
 
     var sliderImageUrl = mutableListOf<String>(
         "https://soccer-news.s3.ap-southeast-1.amazonaws.com/uno.png",

@@ -12,12 +12,16 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.example.secondhiltapp.R
+import com.example.secondhiltapp.data.SoccerVideos
 import com.example.secondhiltapp.databinding.FragmentDetailsBinding
 import com.example.secondhiltapp.databinding.FragmentGalleryBinding
+import com.example.secondhiltapp.ui.gallery.GalleryFragment
 
 private val URL_3WE = "https://asia3we.com/"
 
-class DetailsFragment : Fragment(R.layout.fragment_details) {
+class DetailsFragment(
+    private val url: String
+) : Fragment(R.layout.fragment_details) {
 
     private val args by navArgs<DetailsFragmentArgs>()
 
@@ -30,9 +34,9 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
         _binding = FragmentDetailsBinding.bind(view)
 
         binding.apply {
-            val video = args.video
-            activity?.let {
 
+            val video = url//soccerVideos.video//args.video
+            activity?.let {
             }
             webview.apply {
                 video?.let { this.loadUrl(it) }

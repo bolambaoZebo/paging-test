@@ -10,9 +10,7 @@ import com.example.secondhiltapp.preferences.PreferencesManager
 import com.example.secondhiltapp.preferences.SortOrder
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -45,7 +43,7 @@ class BookmarkViewModel @Inject constructor(
         bookmarkDao.getBookmarks(query,filterPreferences.sortOrder, filterPreferences.hideCompleted)//taskDao.getTasks(query, filterPreferences.sortOrder, filterPreferences.hideCompleted)
     }
 
-    val bookmark = bookmarksFlow.asLiveData()
+    val bookmark = bookmarksFlow.stateIn(viewModelScope, SharingStarted.Lazily, null)//asLiveData()
 
     fun onSortOrderSelected(sortOrder: SortOrder) = viewModelScope.launch {
         preferencesManager.updateSortOrder(sortOrder)
