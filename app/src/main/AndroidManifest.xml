@@ -14,8 +14,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SecondHiltApp">
         <activity
-            android:name=".ui.stats.StatsFragment"
-            android:exported="true" />
+            android:name=".ui.details.NewsActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.SecondHiltApp"
+            android:label="@string/app_name"
+            />
+        <activity
+            android:name=".ui.details.VideoActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.SecondHiltApp" />
         <activity
             android:name=".SplashScreen"
             android:exported="true"

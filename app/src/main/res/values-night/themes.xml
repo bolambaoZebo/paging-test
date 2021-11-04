@@ -34,5 +34,9 @@
         <item name="backgroundTint">@color/purple_500</item>
         <item name="android:textColor">@color/purple_700</item>
     </style>
+    <style name="ThemeOverlay.SecondHiltApp.FullscreenContainer" parent="">
+        <item name="fullscreenBackgroundColor">@color/light_blue_900</item>
+        <item name="fullscreenTextColor">@color/light_blue_A400</item>
+    </style>
 
 </resources>

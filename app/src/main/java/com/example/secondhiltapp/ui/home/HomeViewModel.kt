@@ -9,13 +9,12 @@ import com.example.secondhiltapp.db.entity.SoccerNews
 import com.example.secondhiltapp.preferences.BOOKMARKTYPE
 import com.example.secondhiltapp.preferences.SortOrder
 import com.example.secondhiltapp.ui.gallery.GalleryViewModel
+import com.example.secondhiltapp.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.cache
-import kotlinx.coroutines.flow.receiveAsFlow
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 
@@ -26,7 +25,51 @@ class HomeViewModel @Inject constructor(
 ) : ViewModel() {
 
     fun currentLang() = soccerRepository.getLanguageNow()
-    val soccerData = soccerRepository.getSoccerNews().stateIn(viewModelScope, SharingStarted.Lazily, null )
+
+    private val refreshTriggerChannel = Channel<Refresh>()
+    private val refreshTrigger = refreshTriggerChannel.receiveAsFlow()
+
+    private val addEditTaskEventChannel = Channel<AddEditTaskEvent>()
+    val addEditTaskEvent = addEditTaskEventChannel.receiveAsFlow()
+
+    var pendingScrollToTopAfterRefresh = false
+//    val soccerData = soccerRepository.getSoccerNews().stateIn(viewModelScope, SharingStarted.Lazily, null )
+
+    val soccerData = refreshTrigger.flatMapLatest { refresh ->
+        soccerRepository.getSoccerNews(
+            refresh == Refresh.FORCE,
+            onFetchSuccess = {
+                pendingScrollToTopAfterRefresh = true
+            },
+            onFetchFailed = { t ->
+                viewModelScope.launch { addEditTaskEventChannel.send(AddEditTaskEvent.ShowErrorMessage(t)) }
+            }
+        )
+    }.stateIn(viewModelScope, SharingStarted.Lazily, null)
+
+    init {
+        viewModelScope.launch {
+            soccerRepository.deleteNonBookmarkedArticlesOlderThan(
+                System.currentTimeMillis() - TimeUnit.DAYS.toMillis(7)
+            )
+        }
+    }
+
+    fun onStart() {
+        if (soccerData.value !is Resource.Loading) {
+            viewModelScope.launch {
+                refreshTriggerChannel.send(Refresh.NORMAL)
+            }
+        }
+    }
+
+    fun onManualRefresh() {
+        if (soccerData.value !is Resource.Loading) {
+            viewModelScope.launch {
+                refreshTriggerChannel.send(Refresh.FORCE)
+            }
+        }
+    }
 
     var sliderImageUrl = mutableListOf<String>(
         "https://soccer-news.s3.ap-southeast-1.amazonaws.com/uno.png",
@@ -34,9 +77,6 @@ class HomeViewModel @Inject constructor(
         "https://soccer-news.s3.ap-southeast-1.amazonaws.com/tres.png",
         "https://soccer-news.s3.ap-southeast-1.amazonaws.com/tres.png"
     )
-    private val addEditTaskEventChannel = Channel<AddEditTaskEvent>()
-    val addEditTaskEvent = addEditTaskEventChannel.receiveAsFlow()
-
 
     //METHODS
     fun onSaveNews(bookMarkData: SoccerNews){
@@ -73,10 +113,15 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    enum class Refresh {
+        FORCE, NORMAL
+    }
+
     sealed class AddEditTaskEvent {
 //        data class ShowInvalidInputMessage(val msg: String) : AddEditTaskEvent()
 //        data class NavigateBackWithResult(val result: Int) : AddEditTaskEvent()
         data class SaveBookmark(val msg: String) : AddEditTaskEvent()
         data class AlreadySaved(val msg: String) : AddEditTaskEvent()
+        data class ShowErrorMessage(val error: Throwable) : AddEditTaskEvent()
     }
 }

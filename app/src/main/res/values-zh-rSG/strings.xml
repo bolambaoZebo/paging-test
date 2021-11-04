@@ -53,4 +53,8 @@
     <string name="news_fragment">消息</string>
     <string name="click_video_to_un_mute">点击视频取消静音</string>
     <string name="click_here">点击这里</string>
+    <string name="title_activity_video">视频活动</string>
+    <string name="action_settings">设置</string>
+    <string name="like_post">" 喜欢"</string>
+    <string name="comment_post">评论</string>
 </resources>

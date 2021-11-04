@@ -5,17 +5,24 @@
       <map>
         <entry key="../../../../../../../layout/custom_preview.xml" value="0.3234375" />
         <entry key="app/src/main/res/drawable/gradient.xml" value="0.335" />
+        <entry key="app/src/main/res/drawable/ic_baseline_comment_24.xml" value="0.5" />
         <entry key="app/src/main/res/drawable/ic_baseline_highlight_24.xml" value="0.31296296296296294" />
         <entry key="app/src/main/res/drawable/ic_baseline_language_24.xml" value="0.4722222222222222" />
+        <entry key="app/src/main/res/drawable/ic_baseline_library_add_24.xml" value="0.5" />
+        <entry key="app/src/main/res/drawable/ic_baseline_more_24.xml" value="0.5" />
+        <entry key="app/src/main/res/drawable/ic_baseline_score_24.xml" value="0.5" />
         <entry key="app/src/main/res/drawable/ic_bookmarks.xml" value="0.2972222222222222" />
         <entry key="app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.4" />
         <entry key="app/src/main/res/drawable/ic_search.xml" value="0.12685185185185185" />
         <entry key="app/src/main/res/drawable/ic_sort.xml" value="0.321875" />
         <entry key="app/src/main/res/drawable/snackbar_background.xml" value="0.3194444444444444" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_news.xml" value="0.24569402228976697" />
         <entry key="app/src/main/res/layout/activity_score_details_fragment.xml" value="0.40942028985507245" />
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.15833333333333333" />
+        <entry key="app/src/main/res/layout/activity_video.xml" value="0.165" />
         <entry key="app/src/main/res/layout/bookmark_fragment.xml" value="0.30846223839854414" />
+        <entry key="app/src/main/res/layout/content_scrolling.xml" value="0.5104166666666666" />
         <entry key="app/src/main/res/layout/fragment_details.xml" value="0.25253292806484295" />
         <entry key="app/src/main/res/layout/fragment_details_news.xml" value="0.14994934143870314" />
         <entry key="app/src/main/res/layout/fragment_gallery.xml" value="0.45" />
@@ -35,6 +42,7 @@
         <entry key="app/src/main/res/menu/menu_home.xml" value="0.30572916666666666" />
         <entry key="app/src/main/res/menu/menu_search_news.xml" value="0.30572916666666666" />
         <entry key="app/src/main/res/menu/menu_toolbar.xml" value="0.30572916666666666" />
+        <entry key="app/src/main/res/menu/menu_video.xml" value="0.1" />
       </map>
     </option>
   </component>

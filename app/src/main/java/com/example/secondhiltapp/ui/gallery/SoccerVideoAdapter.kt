@@ -13,7 +13,7 @@ import com.example.secondhiltapp.data.SoccerVideos
 import com.example.secondhiltapp.databinding.ItemUnsplashPhotoBinding
 
 class SoccerVideoAdapter(
-    private val listener: OnItemClickListener,
+    private val onItemImage: (SoccerVideos) -> Unit,
     private val onBookmarkClick: (SoccerVideos) -> Unit
 ) :
     PagingDataAdapter<SoccerVideos, SoccerVideoAdapter.PhotoViewHolder>(PHOTO_COMPARATOR) {
@@ -44,7 +44,8 @@ class SoccerVideoAdapter(
                 if (position != RecyclerView.NO_POSITION) {
                     val item = getItem(position)
                     if (item != null) {
-                        listener.onItemClicked(item)
+//                        listener.onItemClicked(item)
+                        onItemImage(item)
                     }
                 }
             }
@@ -64,12 +65,10 @@ class SoccerVideoAdapter(
                 saveHighlights.setOnClickListener {
                     onBookmarkClick(video)
                 }
+
+
             }
         }
-    }
-
-    interface OnItemClickListener {
-        fun onItemClicked(video: SoccerVideos)
     }
 
     companion object {

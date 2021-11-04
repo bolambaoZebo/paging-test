@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.gallery.GalleryFragment"
     android:id="@+id/root_gallery_layout"
-    android:background="@color/white"
+    android:background="@color/fragment_background"
     >
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout

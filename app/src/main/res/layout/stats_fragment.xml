@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.stats.StatsFragment"
-    android:background="@color/white"
+    android:background="@color/fragment_background"
     >
 
     <androidx.core.widget.NestedScrollView
@@ -22,15 +22,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:ignore="WebViewLayout" />
+
             <TextView
                 android:id="@+id/powered_by_scorebat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:fontFamily="@font/arvo"
                 android:padding="5dp"
                 android:text="@string/powered_by_scorebat_com"
-                android:textSize="12dp"
-                android:layout_gravity="bottom"
-                />
+                android:textSize="12dp" />
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>

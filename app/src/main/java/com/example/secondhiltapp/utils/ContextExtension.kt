@@ -12,3 +12,6 @@ fun Context.snackBar(msg: String,activity: Activity, save: Boolean = true){
         }
     }.show()
 }
+
+val <T> T.exhaustive: T
+    get() = this

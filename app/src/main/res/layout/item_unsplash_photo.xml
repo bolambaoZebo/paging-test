@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="250dp">
+    android:layout_height="300dp">
 
     <ImageView
         android:id="@+id/image_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="260dp" />
 
     <View
         android:id="@+id/image_onclick"
@@ -16,33 +16,34 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/save_highlights"
         android:layout_alignTop="@id/image_view"
-        android:layout_marginBottom="2dp"
+        android:layout_marginBottom="8dp"
         android:background="?android:attr/selectableItemBackground" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:layout_alignBottom="@id/image_view"
-        android:background="@drawable/gradient" />
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="0dp"
+        android:background="@color/black"
+        />
 
     <TextView
         android:id="@+id/text_view_user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/image_view"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="5dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="8dp"
         android:layout_toStartOf="@+id/save_highlights"
-        android:drawablePadding="4dp"
         android:ellipsize="end"
-        android:fontFamily="@font/roboto_mono"
+        android:fontFamily="@font/arvo_bold"
         android:gravity="center_vertical"
         android:maxLines="2"
         android:textColor="#fff"
-        android:textSize="16sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:drawableStartCompat="@drawable/ic_baseline_highlight_24"
         tools:text="username" />

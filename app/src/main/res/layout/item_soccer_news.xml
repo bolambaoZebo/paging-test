@@ -1,116 +1,180 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/fragment_background"
+    android:orientation="vertical">
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/home_cardview"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/home_cardview"
+        style="@style/Widget.MaterialComponents.CardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/fragment_background"
+        android:elevation="2dp"
+        app:rippleColor="@android:color/transparent">
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:elevation="2dp"
-            style="@style/Widget.MaterialComponents.CardView"
-            app:rippleColor="@android:color/transparent"
+            android:background="@color/fragment_background"
             >
 
-            <RelativeLayout
-                android:padding="12dp"
+            <ImageView
+                android:id="@+id/item_horse_news_image"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:id="@+id/item_horse_news_image"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginTop="12dp"
-                    android:scaleType="fitXY"
-                    />
+                android:layout_height="230dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="12dp"
+                android:scaleType="fitXY" />
 
 
-                <LinearLayout
-                    android:id="@+id/linear_left"
+            <LinearLayout
+                android:id="@+id/linear_left"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/item_horse_news_image"
+                android:orientation="horizontal"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="10dp"
+                android:background="@color/fragment_background"
+                >
+
+                <TextView
+                    android:id="@+id/item_horse_news_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/linear_left"
+                    android:layout_alignParentStart="true"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/arvo_bold"
+                    android:text="UK how"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/spacer1"
+                android:layout_width="match_parent"
+                android:layout_height="0.4dp"
+                android:layout_below="@id/linear_left"
+                android:background="@android:color/darker_gray" />
+
+
+
+            <RelativeLayout
+                android:id="@+id/expandableLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/spacer1"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="12dp"
+                android:background="@color/fragment_background"
+                >
+
+                <TextView
+                    android:id="@+id/item_hors_news_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/item_horse_news_image"
-                    android:orientation="horizontal"
-                    android:paddingVertical="10dp"
+                    android:layout_alignParentStart="true"
+                    android:lineSpacingExtra="8dp"
+                    android:lineSpacingMultiplier="1"
+                    android:text="Don't miss the exciting event this weekend"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/save_highlights_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@id/expandableLayout"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="8dp"
+                android:layout_marginBottom="8dp"
+                >
+
+                <LinearLayout
+                    android:id="@+id/save_post"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginRight="12dp"
                     >
 
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_baseline_post_add_24" />
+
                     <TextView
-                        android:id="@+id/item_horse_news_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignTop="@+id/linear_left"
-                        android:layout_alignParentStart="true"
-                        android:layout_weight="1"
-                        android:text="UK how"
-                        android:textSize="24sp"
-                        android:textStyle="bold"
-                        />
-
-                    <LinearLayout
-                        android:id="@+id/save_post"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        >
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:src="@drawable/ic_baseline_library_add_24"
-                            />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="10sp"
-                            android:text="@string/save_post"
-                            />
-
-                    </LinearLayout>
+                        android:text="@string/save_post"
+                        android:textSize="10sp" />
 
                 </LinearLayout>
 
-                <View
-                    android:id="@+id/spacer1"
-                    android:layout_below="@id/linear_left"
-                    android:layout_width="match_parent"
-                    android:layout_height="0.4dp"
-                    android:background="@android:color/darker_gray"
-                    />
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:id="@+id/like_post"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/expandableLayout"
-                    android:layout_below="@id/spacer1"
-                    android:paddingVertical="12dp"
+                    android:orientation="vertical"
+                    android:layout_marginHorizontal="16dp"
                     >
 
-                    <TextView
-                        android:id="@+id/item_hors_news_description"
-                        android:layout_width="match_parent"
+                    <ImageView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:lineSpacingMultiplier="0.8"
-                        android:text="Don't miss the exciting event this weekend"
-                        android:textSize="16sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:lineSpacingExtra="8dp"
-                        />
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_baseline_thumb_up_24" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </RelativeLayout>
-        </com.google.android.material.card.MaterialCardView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/like_post"
+                        android:textSize="10sp" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="1.8dp"
-            />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/comments_post"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+
+                    android:layout_marginHorizontal="16dp"
+                    >
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_baseline_comment_24" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/comment_post"
+                        android:textSize="10sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="1.8dp" />
 </LinearLayout>
