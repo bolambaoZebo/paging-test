@@ -1,5 +1,6 @@
 package com.example.secondhiltapp.ui.home
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.text.Html
@@ -8,6 +9,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -15,38 +17,34 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.viewpager2.widget.ViewPager2
-import com.example.secondhiltapp.MainActivity
-import com.example.secondhiltapp.R
+import com.example.secondhiltapp.*
 import com.example.secondhiltapp.databinding.HomeFragmentBinding
+import com.example.secondhiltapp.db.entity.AdsModel
 import com.example.secondhiltapp.db.entity.SoccerNews
+import com.example.secondhiltapp.ui.details.NewsActivity
 import com.example.secondhiltapp.ui.home.adapter.HomeSliderAdapter
-import com.example.secondhiltapp.utils.Resource
-import com.example.secondhiltapp.utils.snackBar
+import com.example.secondhiltapp.utils.*
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.home_fragment.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.home_fragment),
     HomeFragmentAdapter.OnClickListeners,
-    HomeSliderAdapter.OnItemSliderClick,
-    MainActivity.OnBottomNavigationFragmentReselectedListener{
+    HomeSliderAdapter.OnItemSliderClick {
+
     private val viewModel by viewModels<HomeViewModel>()
     private var _binding: HomeFragmentBinding? = null
     private val binding get() = _binding
 
-//    private val homeAdapter: HomeFragmentAdapter by lazy {
-//        HomeFragmentAdapter(
-//            requireContext(),
-//            this
-//        )
-//    }
     lateinit var homRecyclerView: RecyclerView
     lateinit var refreshLayout: SwipeRefreshLayout
-
     private lateinit var sliderAdapter: HomeSliderAdapter
     private lateinit var homeViewPager2: ViewPager2
-
+    private lateinit var scrollUp: FloatingActionButton
     private lateinit var dots: Array<TextView?>
 
     private var onImageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
@@ -61,7 +59,16 @@ class HomeFragment : Fragment(R.layout.home_fragment),
         _binding = HomeFragmentBinding.bind(view)
 
         val homeAdapter = HomeAdapter(
-            onItemClick = { soccer ->
+            onItemClick = { soccer, lang ->
+                val tNews = if (lang == LOCAL_ENGLISH) soccer.title!! else soccer.titleChinese!!
+                val tDes =
+                    if (lang == LOCAL_ENGLISH) soccer.description!! else soccer.descriptionChinese!!
+                Intent(requireContext(), NewsActivity::class.java).apply {
+                    this.putExtra(IMAGE_STRING, soccer.imageUrl)
+                    this.putExtra(TITLE_STRING, tNews)
+                    this.putExtra(DESCRIPTION_STRING, tDes)
+                    startActivity(this)
+                }
             },
             onBookmarkClick = { soccer ->
                 viewModel.onSaveNews(soccer)
@@ -71,7 +78,8 @@ class HomeFragment : Fragment(R.layout.home_fragment),
             },
             onCommentClick = { soccer ->
                 Toast.makeText(requireContext(), "comment", Toast.LENGTH_SHORT).show()
-            }
+            },
+            context = requireContext()
         )
 
         homeAdapter.stateRestorationPolicy =
@@ -83,6 +91,7 @@ class HomeFragment : Fragment(R.layout.home_fragment),
         sliderAdapter = HomeSliderAdapter(this)
 
         binding?.apply {
+            scrollUp = homeArrowFab
             homRecyclerView = homeRecyclerView
             refreshLayout = swipeRefreshLayout
             homeViewPager2 = homeViewPager
@@ -107,31 +116,68 @@ class HomeFragment : Fragment(R.layout.home_fragment),
 
                     refreshLayout.isRefreshing = result is Resource.Loading
                     binding?.apply {
-                        homePagerDots.isVisible = !result.data.isNullOrEmpty() //is Resource.Success
-                        homeViewPager.isVisible = !result.data.isNullOrEmpty() //is Resource.Success
-                        textViewError.isVisible = result.error != null && result.data.isNullOrEmpty()
+                        homePagerDots.isVisible =
+                            !result.data.isNullOrEmpty()// && result is Resource.Success
+                        homeViewPager.isVisible =
+                            !result.data.isNullOrEmpty()// && result is Resource.Success
+                        textViewError.isVisible =
+                            result.error != null && result.data.isNullOrEmpty()
                         buttonRetry.isVisible = result.error != null && result.data.isNullOrEmpty()
                     }
-                    homeAdapter.submitList(result.data){
+
+                    homeAdapter.submitList(result.data) {
                         homeAdapter.notifyDataSetChanged()
                     }
-                    result.data?.let { it1 -> sliderAdapter.setupList(it1) }
 
+                    sliderAdapter.setupList(viewModel.sliderImageUrl)
                 }
             }
-
-            viewModel.currentLang().observe(viewLifecycleOwner) {
-                if (it != null) {
-                    homeAdapter.setLanguagesTo(it.language)
-                }
-            }
-
-            refreshLayout.setOnRefreshListener {
-                viewModel.onManualRefresh()
-            }
-
 
         }
+
+        refreshLayout.setOnRefreshListener {
+            viewModel.onManualRefresh()
+        }
+
+        button_retry.setOnClickListener {
+            viewModel.onManualRefresh()
+        }
+
+        viewModel.currentLang().observe(viewLifecycleOwner) {
+            if (it != null) {
+                homeAdapter.setLanguagesTo(it.language)
+            }
+        }
+
+        scrollUp.setOnClickListener {
+            homRecyclerView.smoothScrollToPosition(0)
+            scrollUp.hide()
+        }
+
+
+
+        homeRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                viewModel.isScrolling.value = newState == RecyclerView.SCROLL_STATE_IDLE
+            }
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+
+                if (dy > 0) scrollUp.show() else scrollUp.hide()
+
+                viewModel.isScrolling.observe(viewLifecycleOwner) {
+                    if (!scrollUp.isVisible && it ) {
+                        binding?.homeViewPager?.isVisible = true
+                        binding?.homePagerDots?.isVisible = true
+                    } else {
+                        binding?.homeViewPager?.isVisible = false
+                        binding?.homePagerDots?.isVisible = false
+                    }
+                }
+                super.onScrolled(recyclerView, dx, dy)
+            }
+        })
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.addEditTaskEvent.collect { event ->
@@ -142,11 +188,14 @@ class HomeFragment : Fragment(R.layout.home_fragment),
                     is HomeViewModel.AddEditTaskEvent.AlreadySaved -> {
                         requireActivity().snackBar(event.msg, requireActivity(), false)
                     }
-                }
+                    else -> Toast.makeText(
+                        requireContext(),
+                        getString(R.string.something_went_wrong),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }.exhaustive
             }
         }
-
-
     }
 
     override fun onStart() {
@@ -175,9 +224,9 @@ class HomeFragment : Fragment(R.layout.home_fragment),
             for (i in viewModel.sliderImageUrl.indices) {
                 dots[i] = TextView(requireContext())
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    dots[i]?.text = Html.fromHtml("&#8226", Html.FROM_HTML_MODE_COMPACT)
+                    dots[i]?.text = Html.fromHtml(FROM_HTML, Html.FROM_HTML_MODE_COMPACT)
                 } else {
-                    dots[i]?.text = Html.fromHtml("&#8226")
+                    dots[i]?.text = Html.fromHtml(FROM_HTML)
                 }
 
                 dots[i]?.textSize = 38f
@@ -201,7 +250,17 @@ class HomeFragment : Fragment(R.layout.home_fragment),
     }
 
     override fun onSliderImageClicked(imageUrl: String) {
-        //Toast.makeText(requireContext(), imageUrl, Toast.LENGTH_SHORT).show()
+        viewModel.isActive?.observe(viewLifecycleOwner) {
+            if (it != null && it.isActive == true) {
+//                Toast.makeText(requireContext(), imageUrl, Toast.LENGTH_SHORT).show()
+                requireContext().goTo3WE()
+            } else {
+                requireActivity().snackBar(
+                    resources.getString(R.string.thank_you_for_visiting),
+                    requireActivity()
+                )
+            }
+        }
     }
 
     override fun onDestroy() {
@@ -210,7 +269,6 @@ class HomeFragment : Fragment(R.layout.home_fragment),
         _binding = null
     }
 
-    override fun onBottomNavigationFragmentReselected() {
-        binding?.homeRecyclerView?.scrollToPosition(0)
-    }
 }
+
+private const val FROM_HTML = "&#8226"

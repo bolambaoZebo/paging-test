@@ -57,4 +57,6 @@
     <string name="action_settings">设置</string>
     <string name="like_post">" 喜欢"</string>
     <string name="comment_post">评论</string>
+    <string name="something_went_wrong">出了些问题</string>
+    <string name="Invalid">" 无效的"</string>
 </resources>

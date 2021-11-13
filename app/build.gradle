@@ -14,8 +14,8 @@ android {
         applicationId "com.weiboSportsPro.secondhiltapp"
         minSdk 23
         targetSdk 30
-        versionCode 12
-        versionName "1.12"
+        versionCode 14
+        versionName "1.14"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -118,6 +118,9 @@ dependencies {
     def dataStoreVersion = "1.0.0-alpha02"
     // DataStore
     implementation "androidx.datastore:datastore-preferences:$dataStoreVersion"
+
+//    def  smarteistVersion = "1.4.0"
+//    implementation "com.github.smarteist:autoimageslider:$smarteistVersion"
 
 }
 kapt {

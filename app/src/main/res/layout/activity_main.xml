@@ -3,16 +3,16 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainCoordinatedLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:id="@+id/mainCoordinatedLayout"
-    >
+    tools:context=".MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/appBar"
+        android:background="@color/white"
         android:orientation="vertical">
 
         <androidx.appcompat.widget.Toolbar
@@ -21,35 +21,40 @@
             android:layout_height="?actionBarSize"
             android:background="@color/purple_500"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:layout_collapseMode="pin"
             app:layout_scrollFlags="scroll|enterAlways"
             app:menu="@menu/menu_toolbar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            />
+            app:title="@string/app_name" />
 
     </com.google.android.material.appbar.AppBarLayout>
-
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        app:menu="@menu/menu_bottom_nav"
         app:layout_dodgeInsetEdges="bottom"
-        />
+        app:menu="@menu/menu_bottom_nav" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host_fragment_activity_main"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:defaultNavHost="true"
         android:paddingBottom="50dp"
+        app:defaultNavHost="true"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
         app:navGraph="@navigation/nav_graph" />
 
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout><!--<RelativeLayout-->
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+<!--    android:layout_height="?actionBarSize"-->
+    <!--            app:contentScrim="@color/colorthemeDARKSecond"-->
+
+    <!--<RelativeLayout-->
     <!--    xmlns:android="http://schemas.android.com/apk/res/android"-->
     <!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
     <!--    xmlns:tools="http://schemas.android.com/tools"-->

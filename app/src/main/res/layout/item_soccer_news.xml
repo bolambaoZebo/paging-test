@@ -63,40 +63,14 @@
                 android:layout_below="@id/linear_left"
                 android:background="@android:color/darker_gray" />
 
-
-
-            <RelativeLayout
-                android:id="@+id/expandableLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/spacer1"
-                android:paddingHorizontal="12dp"
-                android:paddingVertical="12dp"
-                android:background="@color/fragment_background"
-                >
-
-                <TextView
-                    android:id="@+id/item_hors_news_description"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:lineSpacingExtra="8dp"
-                    android:lineSpacingMultiplier="1"
-                    android:text="Don't miss the exciting event this weekend"
-                    android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </RelativeLayout>
+<!--here descriptipn-->
 
             <LinearLayout
                 android:id="@+id/save_highlights_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_below="@id/expandableLayout"
+                android:layout_below="@id/spacer1"
                 android:paddingHorizontal="12dp"
                 android:paddingVertical="8dp"
                 android:layout_marginBottom="8dp"
@@ -178,3 +152,31 @@
         android:layout_width="match_parent"
         android:layout_height="1.8dp" />
 </LinearLayout>
+
+
+
+<!--<RelativeLayout-->
+<!--android:id="@+id/expandableLayout"-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:layout_below="@id/spacer1"-->
+<!--android:paddingHorizontal="12dp"-->
+<!--android:paddingVertical="12dp"-->
+<!--android:background="@color/fragment_background"-->
+<!--    >-->
+
+<!--<TextView-->
+<!--    android:id="@+id/item_hors_news_description"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:layout_alignParentStart="true"-->
+<!--    android:lineSpacingExtra="8dp"-->
+<!--    android:lineSpacingMultiplier="1"-->
+<!--    android:text="Don't miss the exciting event this weekend"-->
+<!--    android:textSize="14sp"-->
+<!--    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--    app:layout_constraintEnd_toEndOf="parent"-->
+<!--    app:layout_constraintStart_toStartOf="parent"-->
+<!--    app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--</RelativeLayout>-->

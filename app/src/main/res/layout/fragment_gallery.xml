@@ -62,11 +62,19 @@
             android:visibility="gone"
             tools:visibility="visible" />
 
-
-
-
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/gallery_arrow_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:fabSize="normal"
+        app:backgroundTint="#EEE"
+        app:tint="@color/purple_700"
+        app:srcCompat="@drawable/ic_baseline_arrow_drop_up_24"
+        app:fabCustomSize="36dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        />
 
 </RelativeLayout>

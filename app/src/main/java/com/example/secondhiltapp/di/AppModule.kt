@@ -3,7 +3,6 @@ package com.example.secondhiltapp.di
 import android.app.Application
 import com.example.secondhiltapp.api.network.ApiSoccer
 import com.example.secondhiltapp.db.*
-import com.example.secondhiltapp.db.entity.IsClickable
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

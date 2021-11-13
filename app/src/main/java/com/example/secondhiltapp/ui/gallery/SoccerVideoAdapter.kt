@@ -57,7 +57,7 @@ class SoccerVideoAdapter(
                     .load(video.thumbnail)
                     .centerCrop()
                     .transition(DrawableTransitionOptions.withCrossFade())
-                    .error(R.drawable.ic_error)
+                    .error(R.drawable.ic_baseline_sports_soccer_24)
                     .into(imageView)
 
                 textViewUserName.text = video.title

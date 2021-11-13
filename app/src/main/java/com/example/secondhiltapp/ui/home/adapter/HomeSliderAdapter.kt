@@ -13,24 +13,21 @@ class HomeSliderAdapter(
     private val listener: OnItemSliderClick
 ) : RecyclerView.Adapter<HomeSliderAdapter.HomeSliderViewHolder>(){
 
-//    private var imageList = emptyList<String>()
-
-    private var imageList = emptyList<SoccerNews>()
+    private var imageList = emptyList<String>()
 
     inner class HomeSliderViewHolder(private val binding: ItemHomeSliderBinding) : RecyclerView.ViewHolder(binding.root){
-//        fun bind(data: String, position: Int){
-        fun bind(data: SoccerNews, position: Int){
+
+        fun bind(data: String){
             binding.apply {
                 Glide.with(itemView)
-                    .load(data.imageUrl)
-                    .centerCrop()
+                    .load(data)
                     .transition(DrawableTransitionOptions.withCrossFade())
-                    .error(R.drawable.ic_error)
+                    .error(R.drawable.ic_baseline_sports_soccer_24)
                     .placeholder(R.drawable.ic_baseline_image_search_24)
                     .into(homeItemImageSlider)
 
                 homeItemImageSlider.setOnClickListener {
-                    listener.onSliderImageClicked(data.imageUrl.toString())
+                    listener.onSliderImageClicked(data)
                 }
             }
         }
@@ -43,26 +40,17 @@ class HomeSliderAdapter(
     }
 
     override fun onBindViewHolder(holder: HomeSliderViewHolder, position: Int) {
-//        holder.bind(imageList[position], position)
         val currentItem = imageList?.get(position)
         if (currentItem != null) {
-            holder.bind(currentItem, position)
+            holder.bind(currentItem)
         }
     }
 
     override fun getItemCount() = imageList.size
 
-    fun setupList(newList: List<SoccerNews>){
+    fun setupList(newList: List<String>){
         imageList = newList
         notifyDataSetChanged()
-    }
-
-    fun getImageSize() : Int {
-        return imageList.size
-    }
-
-    fun getIndices() : IntRange {
-        return 0..5
     }
 
     interface OnItemSliderClick {

@@ -7,11 +7,11 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.example.secondhiltapp.LOCAL_ENGLISH
 import com.example.secondhiltapp.R
 import com.example.secondhiltapp.databinding.ItemBookmarkBinding
 import com.example.secondhiltapp.db.entity.BookMarkData
 import com.example.secondhiltapp.preferences.SortOrder
+import com.example.secondhiltapp.utils.LOCAL_ENGLISH
 
 class BookmarkAdapter(
     private val listener: OnItemBookmarkClick

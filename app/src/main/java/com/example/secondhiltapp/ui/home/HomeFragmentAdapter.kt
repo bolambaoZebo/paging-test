@@ -23,13 +23,13 @@ class HomeFragmentAdapter(
             binding.apply {
                 if (language == "en") {
                     binding.itemHorseNewsTitle.text = data.title
-                    binding.itemHorsNewsDescription.text = data.description
+//                    binding.itemHorsNewsDescription.text = data.description
                     Glide.with(context).load(data.imageUrl).into(binding.itemHorseNewsImage)
                 }
 
                 if (language == "zh") {
                     binding.itemHorseNewsTitle.text = data.titleChinese
-                    binding.itemHorsNewsDescription.text = data.descriptionChinese
+//                    binding.itemHorsNewsDescription.text = data.descriptionChinese
                     Glide.with(context).load(data.imageUrl).into(binding.itemHorseNewsImage)
                 }
 
@@ -45,10 +45,8 @@ class HomeFragmentAdapter(
     }
 
     override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
-        val currentItem = oldData?.get(position)
-        if (currentItem != null) {
-            holder.bind(currentItem)
-        }
+        val currentItem: SoccerNews = oldData?.get(position)
+        holder.bind(currentItem)
     }
 
     override fun getItemCount(): Int {

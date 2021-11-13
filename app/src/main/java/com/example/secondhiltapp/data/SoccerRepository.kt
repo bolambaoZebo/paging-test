@@ -27,7 +27,7 @@ class SoccerRepository @Inject constructor(
             pagingSourceFactory = { UnsplashPagingSource(apiSoccer, query, db) }
         ).liveData
 
-    fun getIsActive() = if (db.getIsActiveDao().getIsActive() != null) db.getIsActiveDao().getIsActive() else null
+    fun getIsActive() = db.getIsActiveDao().getIsActive()
 
 
 }

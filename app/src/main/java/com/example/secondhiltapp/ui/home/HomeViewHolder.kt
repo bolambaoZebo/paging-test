@@ -2,9 +2,12 @@ package com.example.secondhiltapp.ui.home
 
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.secondhiltapp.R
 import com.example.secondhiltapp.databinding.ItemSoccerNewsBinding
+import com.example.secondhiltapp.db.entity.BookMarkData
 import com.example.secondhiltapp.db.entity.SoccerNews
+import com.example.secondhiltapp.preferences.SortOrder
 
 class HomeViewHolder(
     private val binding: ItemSoccerNewsBinding,
@@ -18,17 +21,17 @@ class HomeViewHolder(
 
     fun bind(video: SoccerNews) {
         binding.apply {
-            if (language == "en") {
-                binding.itemHorseNewsTitle.text = video.title
-                binding.itemHorsNewsDescription.text = video.description
-                Glide.with(itemView).load(video.imageUrl).into(itemHorseNewsImage)
-            }
-
             if (language == "zh") {
                 binding.itemHorseNewsTitle.text = video.titleChinese
-                binding.itemHorsNewsDescription.text = video.descriptionChinese
-                Glide.with(itemView).load(video.imageUrl).into(itemHorseNewsImage)
+            }else{
+                binding.itemHorseNewsTitle.text = video.title
             }
+            Glide.with(itemView)
+                .load(video.imageUrl)
+                .centerCrop()
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .error(R.drawable.ic_baseline_sports_soccer_24)
+                .into(itemHorseNewsImage)
 
 //            textViewTitle.text = article.title ?: ""
 //            imageViewBookmark.setImageResource(
@@ -42,7 +45,7 @@ class HomeViewHolder(
 
     init {
         binding.apply {
-            root.setOnClickListener {
+            itemHorseNewsImage.setOnClickListener {
                 val position = bindingAdapterPosition
                 if (position != RecyclerView.NO_POSITION) {
                     onItemClick(position)
@@ -69,4 +72,5 @@ class HomeViewHolder(
 
         }
     }
+
 }

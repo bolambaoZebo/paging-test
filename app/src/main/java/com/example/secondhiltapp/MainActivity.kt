@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -31,13 +32,13 @@ import com.example.secondhiltapp.ui.details.VideoActivity
 import com.example.secondhiltapp.ui.gallery.GalleryFragment
 import com.example.secondhiltapp.ui.home.HomeFragment
 import com.example.secondhiltapp.ui.stats.StatsFragment
+import com.example.secondhiltapp.utils.*
 import com.google.android.material.appbar.AppBarLayout
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
-const val LOCAL_ENGLISH = "en"
-const val LOCAL_CHINESE = "zh"
+
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(),
@@ -152,10 +153,10 @@ class MainActivity : AppCompatActivity(),
                 R.id.galleryFragment -> galleryFragment
                 R.id.statsFragment -> statsFragment
                 R.id.bookmarkFragment -> bookmarkFragment
-                else -> throw IllegalArgumentException("Unexpected itemId")
+                else -> throw IllegalArgumentException(getString(R.string.throwUnexpected))
             }
 
-            if (selectedFragment === fragment) {
+            if (selectedFragment.tag == fragment.tag) {
                 if (fragment is OnBottomNavigationFragmentReselectedListener) {
                     fragment.onBottomNavigationFragmentReselected()
                 }
@@ -200,7 +201,7 @@ class MainActivity : AppCompatActivity(),
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val id = item!!.itemId
+        val id = item.itemId
         if (id == R.id.action_english) {
             mainViewModel.setLanguage(LanguageData(LOCAL_ENGLISH))
         }
@@ -256,7 +257,7 @@ class MainActivity : AppCompatActivity(),
 
     private fun navigateToDetailsFragment(soccerVideos: String) {
         Intent(this@MainActivity, VideoActivity::class.java).apply {
-            this.putExtra("video", soccerVideos)
+            this.putExtra(VIDEO_STRING, soccerVideos)
             startActivity(this)
         }
         appBarLayout.setExpanded(true, true)
@@ -266,16 +267,16 @@ class MainActivity : AppCompatActivity(),
         val tNews = if (l == LOCAL_ENGLISH) bookmark.title!! else bookmark.titleChinese!!
         val tDes = if (l == LOCAL_ENGLISH) bookmark.description!! else bookmark.descriptionChinese!!
         Intent(this@MainActivity, NewsActivity::class.java).apply {
-            this.putExtra("imageUrl", bookmark.imageUrl)
-            this.putExtra("title", tNews)
-            this.putExtra("description", tDes)
+            this.putExtra(IMAGE_STRING, bookmark.imageUrl)
+            this.putExtra(TITLE_STRING, tNews)
+            this.putExtra(DESCRIPTION_STRING, tDes)
             startActivity(this)
         }
         appBarLayout.setExpanded(true, true)
     }
 
     override fun onVideoClick(soccerVideos: SoccerVideos) {
-        navigateToDetailsFragment(soccerVideos.video!!)
+        navigateToDetailsFragment(soccerVideos = soccerVideos.video!!)
     }
 
     override fun bookmarkNavigateTo(bookmark: BookMarkData, lang: String) {
@@ -286,17 +287,13 @@ class MainActivity : AppCompatActivity(),
             SortOrder.BY_HIGHLIGHTS -> {
                 navigateToDetailsFragment(bookmark.video!!)
             }
-        }
+            else -> Toast.makeText(this, getString(R.string.Invalid), Toast.LENGTH_SHORT).show()
+        }.exhaustive
     }
-
-
 }
 
-private const val TAG_HOME_FRAGMENT = "TAG_HOME_FRAGMENT"
-private const val TAG_GALLERY_FRAGMENT = "TAG_GALLERY_FRAGMENT"
-private const val TAG_STATS_FRAGMENT = "TAG_STATS_FRAGMENT"
-private const val TAG_BOOKMARKS_FRAGMENT = "TAG_BOOKMARKS_FRAGMENT"
-private const val KEY_SELECTED_INDEX = "KEY_SELECTED_INDEX"
+
+
 
 //        val darkModeFlag = AppCompatDelegate.MODE_NIGHT_YES
 //        AppCompatDelegate.setDefaultNightMode(darkModeFlag)

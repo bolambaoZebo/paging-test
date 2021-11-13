@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.example.secondhiltapp.LOCAL_ENGLISH
 import com.example.secondhiltapp.R
 import com.example.secondhiltapp.databinding.ActivityNewsBinding
+import com.example.secondhiltapp.utils.DESCRIPTION_STRING
+import com.example.secondhiltapp.utils.IMAGE_STRING
+import com.example.secondhiltapp.utils.TITLE_STRING
 
 class NewsActivity : AppCompatActivity() {
 
@@ -16,9 +18,9 @@ class NewsActivity : AppCompatActivity() {
         binding = ActivityNewsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val imageUrl = intent.getStringExtra("imageUrl")
-        val titleText = intent.getStringExtra("title")
-        val descriptionText = intent.getStringExtra("description")
+        val imageUrl = intent.getStringExtra(IMAGE_STRING)
+        val titleText = intent.getStringExtra(TITLE_STRING)
+        val descriptionText = intent.getStringExtra(DESCRIPTION_STRING)
 
         setSupportActionBar(binding.toolbar)
 
@@ -32,7 +34,7 @@ class NewsActivity : AppCompatActivity() {
                 .load(imageUrl)
                 .centerCrop()
                 .transition(DrawableTransitionOptions.withCrossFade())
-                .error(R.drawable.ic_error)
+                .error(R.drawable.ic_baseline_sports_soccer_24)
                 .into(newsDetailsImage)
 
             newsTitle.text = titleText

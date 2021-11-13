@@ -57,7 +57,8 @@ class RoomRepository @Inject constructor(
                 if (forceRefresh) {
                     true
                 } else {
-                    val sortedSoccer = cachedSoccerNews.sortedBy { soccer ->
+                    val sortedSoccer = cachedSoccerNews
+                        .sortedBy { soccer ->
                         soccer.uid
                     }
                     val oldestTimestamp = sortedSoccer.firstOrNull()?.uid
@@ -91,8 +92,8 @@ class RoomRepository @Inject constructor(
         }
     }
 
-    suspend fun deleteNonBookmarkedArticlesOlderThan(timestampInMillis: Long) {
-       soccerDao.deleteAllSoccerNews()// newsArticleDao.deleteNonBookmarkedArticlesOlderThan(timestampInMillis)
-    }
+//    suspend fun deleteNonBookmarkedArticlesOlderThan(timestampInMillis: Long) {
+//       soccerDao.deleteAllSoccerNews()// newsArticleDao.deleteNonBookmarkedArticlesOlderThan(timestampInMillis)
+//    }
 
 }

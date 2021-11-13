@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
+import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.secondhiltapp.MainActivity
 import com.example.secondhiltapp.R
@@ -17,7 +18,9 @@ import com.example.secondhiltapp.data.SoccerVideos
 import com.example.secondhiltapp.databinding.FragmentGalleryBinding
 import com.example.secondhiltapp.db.entity.BookMarkData
 import com.example.secondhiltapp.utils.snackBar
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_gallery.*
 import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
@@ -27,6 +30,7 @@ class GalleryFragment(
 {
     private val viewModel by viewModels<GalleryViewModel>()
 
+    private lateinit var scrollUp: FloatingActionButton
     private var _binding: FragmentGalleryBinding? = null
     private val binding get() = _binding!!
 
@@ -62,6 +66,8 @@ class GalleryFragment(
                 footer = SoccerVideoLoadStateAdapter { adapter.refresh()}
             )
 
+            scrollUp = galleryArrowFab
+
             refreshLayout = refreshVideo
 
             buttonRetry.setOnClickListener { adapter.retry()}
@@ -91,7 +97,6 @@ class GalleryFragment(
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.photos.observe(viewLifecycleOwner, Observer {
-
                 adapter.submitData(viewLifecycleOwner.lifecycle, it)
             })
         }
@@ -108,6 +113,21 @@ class GalleryFragment(
                 }
             }
         }
+
+
+        scrollUp.setOnClickListener {
+            binding.recyclerView.smoothScrollToPosition(0)
+            scrollUp.hide()
+        }
+
+        binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                if (newState == RecyclerView.SCROLL_STATE_IDLE){
+                    scrollUp.show()
+                }
+                super.onScrollStateChanged(recyclerView, newState)
+            }
+        })
 
         setHasOptionsMenu(true)
 

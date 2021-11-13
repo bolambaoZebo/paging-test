@@ -1,19 +1,23 @@
 package com.example.secondhiltapp.ui.home
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.example.secondhiltapp.databinding.ItemSoccerNewsBinding
 import com.example.secondhiltapp.db.entity.SoccerNews
+import com.example.secondhiltapp.utils.getLocale
 
 class HomeAdapter (
-    private val onItemClick: (SoccerNews) -> Unit,
+    private val onItemClick: (SoccerNews, lang: String) -> Unit,
     private val onLikeClick: (SoccerNews) -> Unit,
     private val onCommentClick: (SoccerNews) -> Unit,
-    private val onBookmarkClick: (SoccerNews) -> Unit
+    private val onBookmarkClick: (SoccerNews) -> Unit,
+    private val context: Context
 ) : ListAdapter<SoccerNews, HomeViewHolder>(HomeComparator()) {
 
-    private var language = "en"
+    private val currentLocale = getLocale(context.resources)
+    private var language = currentLocale.toString()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
         val binding =
@@ -22,7 +26,7 @@ class HomeAdapter (
             onItemClick = { position ->
                 val article = getItem(position)
                 if (article != null) {
-                    onItemClick(article)
+                    onItemClick(article, language)
                 }
             },
             onLikeClick = { position ->

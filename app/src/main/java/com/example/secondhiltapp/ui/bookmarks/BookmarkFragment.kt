@@ -13,7 +13,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.secondhiltapp.LOCAL_ENGLISH
 import com.example.secondhiltapp.R
 import com.example.secondhiltapp.databinding.BookmarkFragmentBinding
 import com.example.secondhiltapp.db.entity.BookMarkData
@@ -74,7 +73,7 @@ class BookmarkFragment(
                 viewModel.bookmark.collect {
                     val bookmarks = it ?: return@collect
 
-                    bookmarkAdapter.submitList(it)
+                    bookmarkAdapter.submitList(bookmarks)
 
 //                    bookmarksAdapter.submitList(bookmarks)
 //                    textViewNoBookmarks.isVisible = bookmarks.isEmpty()
@@ -116,7 +115,7 @@ class BookmarkFragment(
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_bookmarks, menu)
-        menu!!.findItem(R.id.language_icon).isVisible = false
+        menu.findItem(R.id.language_icon).isVisible = false
 //        menu!!.findItem(R.id.action_score).isVisible = false
 
         val searchItem = menu.findItem(R.id.action_search)

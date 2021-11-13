@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.graphics.Color
 import android.view.Gravity
 import android.view.View
+import android.view.animation.TranslateAnimation
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.SearchView
@@ -30,6 +31,23 @@ fun RecyclerView.show(){
 
 fun RecyclerView.hide(){
     visibility = View.GONE
+}
+
+fun View.slideUp(duration: Int = 500) {
+    val animate = TranslateAnimation(0f, 0f, this.height.toFloat(), 0f)
+    animate.duration = duration.toLong()
+    animate.fillAfter = true
+    this.alpha = 0f
+    this.startAnimation(animate)
+    visibility = View.GONE
+}
+
+fun View.slideDown(duration: Int = 500) {
+    visibility = View.VISIBLE
+    val animate = TranslateAnimation(0f, 0f, 0f, this.height.toFloat())
+    animate.duration = duration.toLong()
+    animate.fillAfter = true
+    this.startAnimation(animate)
 }
 
 //@SuppressLint("ResourceAsColor")

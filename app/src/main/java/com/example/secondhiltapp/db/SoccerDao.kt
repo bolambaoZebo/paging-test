@@ -20,6 +20,9 @@ interface SoccerDao{
     @Query("SELECT * FROM soccer_news")
     fun getSoccer() : Flow<List<SoccerNews>>
 
+    @Query("SELECT * FROM soccer_news LIMIT :size ")
+    suspend fun getRandomPosts(size: Int): List<SoccerNews>
+
 
 //    LiveData<List<SoccerNews>>
 //    @Query("SELECT * FROM soccer_news WHERE teamLeague LIKE :searchQuery")

@@ -11,8 +11,10 @@ import android.webkit.WebViewClient
 import androidx.core.view.isVisible
 import com.example.secondhiltapp.R
 import com.example.secondhiltapp.databinding.ActivityVideoBinding
+import com.example.secondhiltapp.utils.URL_3WE
+import com.example.secondhiltapp.utils.VIDEO_STRING
+import com.example.secondhiltapp.utils.goTo3WE
 
-private val URL_3WE = "https://asia3we.com/"
 
 class VideoActivity : AppCompatActivity() {
 
@@ -23,7 +25,7 @@ class VideoActivity : AppCompatActivity() {
         binding = ActivityVideoBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val video = intent.getStringExtra("video")
+        val video = intent.getStringExtra(VIDEO_STRING)
 
         setSupportActionBar(binding.toolbar)
 
@@ -39,11 +41,9 @@ class VideoActivity : AppCompatActivity() {
                 webViewClient = object : WebViewClient() {
                     override fun onPageFinished(view: WebView?, url: String?) {
                         super.onPageFinished(view, url)
-                        if (binding != null) {
-                            binding.progressBar.isVisible = false
-                            binding.imageBanner.apply {
-                                setImageResource(R.drawable.banner_one)
-                            }
+                        binding.progressBar.isVisible = false
+                        binding.imageBanner.apply {
+                            setImageResource(R.drawable.banner_one)
                         }
                     }
                 }
@@ -51,9 +51,7 @@ class VideoActivity : AppCompatActivity() {
 
             btnClickhere.apply {
                 setOnClickListener {
-                    val openURL = Intent(Intent.ACTION_VIEW)
-                    openURL.data = Uri.parse(URL_3WE)
-                    context?.startActivity(openURL, null)
+                   this@VideoActivity.goTo3WE()
                 }
                 paint.isUnderlineText = true
             }

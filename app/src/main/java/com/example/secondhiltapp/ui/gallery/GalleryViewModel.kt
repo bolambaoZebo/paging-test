@@ -20,17 +20,17 @@ import javax.inject.Inject
 
 @HiltViewModel
 class GalleryViewModel @Inject constructor(
-    private val repository: SoccerRepository,
+    repository: SoccerRepository,
     private val bookmarkDao: BookmarkDao,
     @Assisted state: SavedStateHandle
 ) : ViewModel() {
 
-    private val currentQuery = MutableLiveData(DEFAULT_QUERY)
+//    private val currentQuery = MutableLiveData(DEFAULT_QUERY)
 
     private val galleryEventsChannel = Channel<GalleryEvents>()
     val galleryEvent = galleryEventsChannel.receiveAsFlow()
 
-    private val currentQuerySave = state.getLiveData(CURRENT_QUERY, DEFAULT_QUERY)
+//    private val currentQuerySave = state.getLiveData(CURRENT_QUERY, DEFAULT_QUERY)
 //    val photos = currentQuery.switchMap { queryString ->
 //        repository.getSearchResults(queryString).cachedIn(viewModelScope)
 //    }
@@ -39,9 +39,9 @@ class GalleryViewModel @Inject constructor(
 
     val isActive = repository.getIsActive()
 
-    fun searchPhotos(query: String) {
-        currentQuery.value = query
-    }
+//    fun searchPhotos(query: String) {
+//        currentQuery.value = query
+//    }
 
     fun onBookmarkClick(data: SoccerVideos){
         saveGalleryBookmark(data)
