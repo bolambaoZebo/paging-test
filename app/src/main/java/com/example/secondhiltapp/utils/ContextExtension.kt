@@ -8,6 +8,7 @@ import android.net.Uri
 import android.os.Build
 import com.example.secondhiltapp.R
 import com.google.android.material.snackbar.Snackbar
+import java.text.SimpleDateFormat
 import java.util.*
 
 fun Context.snackBar(msg: String,activity: Activity, save: Boolean = true){
@@ -28,6 +29,18 @@ fun Context.goTo3WE(){
     openURL.data = Uri.parse(URL_3WE)
     this.startActivity(openURL, null)
 }
+
+fun convertToCustomFormat(dateStr: String?): String {
+    val utc = TimeZone.getTimeZone("UTC")
+    val sourceFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssss")//SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy")
+    val destFormat = SimpleDateFormat("dd-MMM-yyyy HH:mm aa")
+    sourceFormat.timeZone = utc
+    val convertedDate = sourceFormat.parse(dateStr)
+    return destFormat.format(convertedDate)
+}
+
+fun getResourceString(id: Int): String = getResourceString(id)
+
 
 val <T> T.exhaustive: T
     get() = this

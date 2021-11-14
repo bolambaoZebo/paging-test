@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -44,7 +45,7 @@ class GalleryFragment(
 
         val adapter = SoccerVideoAdapter(
             onBookmarkClick = { video ->
-                viewModel.onBookmarkClick(video)
+                viewModel.onBookmarkClick(video, requireContext())
              },
             onItemImage = { video ->
                 viewModel.isActive?.observe(viewLifecycleOwner){
@@ -97,6 +98,7 @@ class GalleryFragment(
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.photos.observe(viewLifecycleOwner, Observer {
+
                 adapter.submitData(viewLifecycleOwner.lifecycle, it)
             })
         }

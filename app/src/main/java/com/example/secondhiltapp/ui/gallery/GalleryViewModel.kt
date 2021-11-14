@@ -1,11 +1,13 @@
 package com.example.secondhiltapp.ui.gallery
 
+import android.content.Context
 import androidx.hilt.Assisted
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
+import com.example.secondhiltapp.R
 import com.example.secondhiltapp.data.SoccerRepository
 import com.example.secondhiltapp.data.SoccerVideos
 import com.example.secondhiltapp.db.BookmarkDao
@@ -43,11 +45,11 @@ class GalleryViewModel @Inject constructor(
 //        currentQuery.value = query
 //    }
 
-    fun onBookmarkClick(data: SoccerVideos){
-        saveGalleryBookmark(data)
+    fun onBookmarkClick(data: SoccerVideos, context: Context){
+        saveGalleryBookmark(data,context)
     }
 
-    private fun saveGalleryBookmark(data: SoccerVideos) = viewModelScope.launch{
+    private fun saveGalleryBookmark(data: SoccerVideos, context: Context) = viewModelScope.launch{
         val bookmark = BookMarkData(
             data.id,
             data.competition,
@@ -55,7 +57,7 @@ class GalleryViewModel @Inject constructor(
             data.thumbnail,
             data.video,
             data.thumbnail,
-            data.title + "don't miss the action!",
+            data.title + context.getString(R.string.dont_miss_the_action),
             "",
             "",
             "",
@@ -67,9 +69,9 @@ class GalleryViewModel @Inject constructor(
 
         if (isSave == null){
             bookmarkDao.insert(bookmark)
-            galleryEventsChannel.send(GalleryEvents.SaveHighlights("${data.title} is saved"))
+            galleryEventsChannel.send(GalleryEvents.SaveHighlights("${data.title} ${context.getString(R.string.is_save)}"))
         }else{
-            galleryEventsChannel.send(GalleryEvents.AllreadySaveHighlights("${data.title} is already saved"))
+            galleryEventsChannel.send(GalleryEvents.AllreadySaveHighlights("${data.title} ${context.getString(R.string.is_already_save)}"))
         }
     }
 

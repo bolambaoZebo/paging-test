@@ -40,6 +40,7 @@
     <string name="sort_by_date_created">Sort by date</string>
     <string name="delete_all">Delete all</string>
     <string name="is_save">is save</string>
+    <string name="is_already_save">is already saved</string>
     <string name="highlights_video">"Highlights "</string>
     <string name="news_text">News</string>
     <string name="instructions_bookmark">Note: click save post or save highlight in the home and highlights tabs to save here.</string>
@@ -65,5 +66,7 @@
     <string name="something_went_wrong">Something went wrong</string>
     <string name="throwUnexpected" translatable="false">Unexpected itemId</string>
     <string name="Invalid">Invalid</string>
+    <string name="visit_website">Thank you for visiting our App. Don\'t also forget to visit our website just click the button</string>
+    <string name="dont_miss_the_action">don\'t miss the action!</string>
 
 </resources>

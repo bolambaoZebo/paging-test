@@ -59,4 +59,7 @@
     <string name="comment_post">评论</string>
     <string name="something_went_wrong">出了些问题</string>
     <string name="Invalid">" 无效的"</string>
+    <string name="visit_website">感谢您访问我们的应用程序。不要忘记访问我们的网站只需单击按钮</string>
+    <string name="dont_miss_the_action">不要错过行动！</string>
+    <string name="is_already_save">已经保存</string>
 </resources>

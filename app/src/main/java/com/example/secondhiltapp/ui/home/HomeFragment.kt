@@ -71,7 +71,7 @@ class HomeFragment : Fragment(R.layout.home_fragment),
                 }
             },
             onBookmarkClick = { soccer ->
-                viewModel.onSaveNews(soccer)
+                viewModel.onSaveNews(soccer,requireContext())
             },
             onLikeClick = { soccer ->
                 Toast.makeText(requireContext(), "like", Toast.LENGTH_SHORT).show()
@@ -153,7 +153,6 @@ class HomeFragment : Fragment(R.layout.home_fragment),
             homRecyclerView.smoothScrollToPosition(0)
             scrollUp.hide()
         }
-
 
 
         homeRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -246,7 +245,7 @@ class HomeFragment : Fragment(R.layout.home_fragment),
     }
 
     override fun onSaveClick(data: SoccerNews) {
-        viewModel.onSaveNews(data)
+        viewModel.onSaveNews(data, requireContext())
     }
 
     override fun onSliderImageClicked(imageUrl: String) {

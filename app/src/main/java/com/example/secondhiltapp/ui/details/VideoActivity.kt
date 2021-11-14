@@ -1,6 +1,8 @@
 package com.example.secondhiltapp.ui.details
 
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.Color.*
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -35,6 +37,8 @@ class VideoActivity : AppCompatActivity() {
         }
         binding.apply {
 
+            runningText.isSelected = true
+            webview.setBackgroundColor(BLACK)
             webview.apply {
                 video?.let { this.loadUrl(it) }
                 settings.javaScriptEnabled = true

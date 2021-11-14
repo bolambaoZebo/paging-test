@@ -1,8 +1,10 @@
 package com.example.secondhiltapp.ui.home
 
+import android.content.Context
 import androidx.lifecycle.*
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
+import com.example.secondhiltapp.R
 import com.example.secondhiltapp.data.RoomRepository
 import com.example.secondhiltapp.data.SoccerRepository
 import com.example.secondhiltapp.db.BookmarkDao
@@ -82,9 +84,9 @@ class HomeViewModel @Inject constructor(
     )
 
     //METHODS
-    fun onSaveNews(bookMarkData: SoccerNews) {
+    fun onSaveNews(bookMarkData: SoccerNews, context: Context) {
         var data = convertToBookMark(bookMarkData)
-        saveBookmark(data)
+        saveBookmark(data, context)
     }
 
     fun convertToBookMark(soccer: SoccerNews): BookMarkData {
@@ -105,13 +107,14 @@ class HomeViewModel @Inject constructor(
         )
     }
 
-    private fun saveBookmark(data: BookMarkData) = viewModelScope.launch {
+    private fun saveBookmark(data: BookMarkData, context: Context) = viewModelScope.launch {
         val isSave = bookmarkDao.getBookmark(data.title!!)
         if (isSave == null) {
             bookmarkDao.insert(data)
-            addEditTaskEventChannel.send(AddEditTaskEvent.SaveBookmark("${data.title} is saved"))
+            addEditTaskEventChannel.send(AddEditTaskEvent.SaveBookmark("${data.title} ${context.getString(
+                R.string.is_save)}"))
         } else {
-            addEditTaskEventChannel.send(AddEditTaskEvent.AlreadySaved("${data.title} is already saved"))
+            addEditTaskEventChannel.send(AddEditTaskEvent.AlreadySaved("${data.title} ${context.getString(R.string.is_already_save)}"))
         }
     }
 

@@ -1,8 +1,10 @@
 package com.example.secondhiltapp.ui.gallery
 
 import android.annotation.SuppressLint
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -11,6 +13,13 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.secondhiltapp.R
 import com.example.secondhiltapp.data.SoccerVideos
 import com.example.secondhiltapp.databinding.ItemUnsplashPhotoBinding
+import com.example.secondhiltapp.utils.convertToCustomFormat
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.time.Instant
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 class SoccerVideoAdapter(
     private val onItemImage: (SoccerVideos) -> Unit,
@@ -51,6 +60,7 @@ class SoccerVideoAdapter(
             }
         }
 
+        @RequiresApi(Build.VERSION_CODES.O)
         fun bind(video: SoccerVideos) {
             binding.apply {
                 Glide.with(itemView)
@@ -61,6 +71,8 @@ class SoccerVideoAdapter(
                     .into(imageView)
 
                 textViewUserName.text = video.title
+
+                txtVideoDate.text = convertToCustomFormat(video.date).uppercase()//date.toString()
 
                 saveHighlights.setOnClickListener {
                     onBookmarkClick(video)
@@ -81,4 +93,22 @@ class SoccerVideoAdapter(
                 oldItem == newItem
         }
     }
+
+
+//                val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssss")
+//                val date: Date = format.parse(video.date)
+
+//    fun convertISOTimeToDate(isoTime: String): String? {
+//        val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
+//        var convertedDate: Date? = null
+//        var formattedDate: String? = null
+//        try {
+//            convertedDate = sdf.parse(isoTime)
+//            formattedDate = SimpleDateFormat("dd-MM-yyyy" + "\n" + " hh:mm:ss a").format(convertedDate)
+//        } catch (e: ParseException) {
+//            e.printStackTrace()
+//        }
+//
+//        return formattedDate
+//    }
 }
