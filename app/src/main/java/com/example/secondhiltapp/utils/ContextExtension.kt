@@ -6,6 +6,8 @@ import android.content.Intent
 import android.content.res.Resources
 import android.net.Uri
 import android.os.Build
+import android.view.View
+import android.widget.ImageView
 import com.example.secondhiltapp.R
 import com.google.android.material.snackbar.Snackbar
 import java.text.SimpleDateFormat
@@ -39,7 +41,6 @@ fun convertToCustomFormat(dateStr: String?): String {
     return destFormat.format(convertedDate)
 }
 
-fun getResourceString(id: Int): String = getResourceString(id)
 
 
 val <T> T.exhaustive: T

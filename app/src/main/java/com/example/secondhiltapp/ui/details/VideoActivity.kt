@@ -16,6 +16,7 @@ import com.example.secondhiltapp.databinding.ActivityVideoBinding
 import com.example.secondhiltapp.utils.URL_3WE
 import com.example.secondhiltapp.utils.VIDEO_STRING
 import com.example.secondhiltapp.utils.goTo3WE
+import com.example.secondhiltapp.utils.setSafeOnClickListener
 
 
 class VideoActivity : AppCompatActivity() {
@@ -47,14 +48,14 @@ class VideoActivity : AppCompatActivity() {
                         super.onPageFinished(view, url)
                         binding.progressBar.isVisible = false
                         binding.imageBanner.apply {
-                            setImageResource(R.drawable.banner_one)
+                            setImageResource(R.drawable.banner_soccer_bonus)
                         }
                     }
                 }
             }
 
             btnClickhere.apply {
-                setOnClickListener {
+                setSafeOnClickListener {
                    this@VideoActivity.goTo3WE()
                 }
                 paint.isUnderlineText = true

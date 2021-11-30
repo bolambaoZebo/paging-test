@@ -18,6 +18,7 @@ import com.example.secondhiltapp.R
 import com.example.secondhiltapp.data.SoccerVideos
 import com.example.secondhiltapp.databinding.FragmentGalleryBinding
 import com.example.secondhiltapp.db.entity.BookMarkData
+import com.example.secondhiltapp.utils.setSafeOnClickListener
 import com.example.secondhiltapp.utils.snackBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.hilt.android.AndroidEntryPoint
@@ -71,7 +72,7 @@ class GalleryFragment(
 
             refreshLayout = refreshVideo
 
-            buttonRetry.setOnClickListener { adapter.retry()}
+            buttonRetry.setSafeOnClickListener { adapter.retry()}
             refreshLayout.setOnRefreshListener {
                 refreshLayout.isRefreshing = false
                 adapter.retry()
@@ -117,7 +118,7 @@ class GalleryFragment(
         }
 
 
-        scrollUp.setOnClickListener {
+        scrollUp.setSafeOnClickListener {
             binding.recyclerView.smoothScrollToPosition(0)
             scrollUp.hide()
         }

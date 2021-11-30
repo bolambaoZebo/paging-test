@@ -17,6 +17,14 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 
 
+
+fun View.setSafeOnClickListener(onSafeClick: (View) -> Unit) {
+    val safeClickListener = SafeClickListener {
+        onSafeClick(it)
+    }
+    setOnClickListener(safeClickListener)
+}
+
 fun TabLayout.tabShow(){
     visibility = View.VISIBLE
 }

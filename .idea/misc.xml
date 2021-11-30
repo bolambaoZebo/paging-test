@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../../../../layout/custom_preview.xml" value="0.3234375" />
+        <entry key="app/src/main/res/drawable/dialog_background.xml" value="0.48102564102564105" />
         <entry key="app/src/main/res/drawable/gradient.xml" value="0.335" />
         <entry key="app/src/main/res/drawable/ic_baseline_arrow_drop_up_24.xml" value="0.3333333333333333" />
         <entry key="app/src/main/res/drawable/ic_baseline_comment_24.xml" value="0.5" />
@@ -30,9 +31,10 @@
         <entry key="app/src/main/res/layout/fragment_stats.xml" value="0.41302083333333334" />
         <entry key="app/src/main/res/layout/home_fragment.xml" value="0.19786096256684493" />
         <entry key="app/src/main/res/layout/item_bookmark.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/item_home_slider.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/item_home_slider.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_soccer_news.xml" value="0.2767210144927536" />
         <entry key="app/src/main/res/layout/item_unsplash_photo.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/popup_dialog.xml" value="0.35778985507246375" />
         <entry key="app/src/main/res/layout/stats_fragment.xml" value="0.27760416666666665" />
         <entry key="app/src/main/res/layout/unsplash_video_load_state_footer.xml" value="0.25253292806484295" />
         <entry key="app/src/main/res/menu/menu_bookmarks.xml" value="0.26666666666666666" />

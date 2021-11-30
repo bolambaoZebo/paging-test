@@ -12,6 +12,7 @@ import com.example.secondhiltapp.db.SoccerDao
 import com.example.secondhiltapp.db.entity.BookMarkData
 import com.example.secondhiltapp.db.entity.SoccerNews
 import com.example.secondhiltapp.preferences.SortOrder
+import com.example.secondhiltapp.utils.LOCAL_ENGLISH
 import com.example.secondhiltapp.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -84,9 +85,9 @@ class HomeViewModel @Inject constructor(
     )
 
     //METHODS
-    fun onSaveNews(bookMarkData: SoccerNews, context: Context) {
+    fun onSaveNews(bookMarkData: SoccerNews, context: Context, lang: String) {
         var data = convertToBookMark(bookMarkData)
-        saveBookmark(data, context)
+        saveBookmark(data, context, lang)
     }
 
     fun convertToBookMark(soccer: SoccerNews): BookMarkData {
@@ -107,14 +108,15 @@ class HomeViewModel @Inject constructor(
         )
     }
 
-    private fun saveBookmark(data: BookMarkData, context: Context) = viewModelScope.launch {
+    private fun saveBookmark(data: BookMarkData, context: Context, lang: String) = viewModelScope.launch {
         val isSave = bookmarkDao.getBookmark(data.title!!)
+        val dTitle = if (lang == LOCAL_ENGLISH) data.title!! else data.titleChinese!!
         if (isSave == null) {
             bookmarkDao.insert(data)
-            addEditTaskEventChannel.send(AddEditTaskEvent.SaveBookmark("${data.title} ${context.getString(
+            addEditTaskEventChannel.send(AddEditTaskEvent.SaveBookmark("${dTitle} ${context.getString(
                 R.string.is_save)}"))
         } else {
-            addEditTaskEventChannel.send(AddEditTaskEvent.AlreadySaved("${data.title} ${context.getString(R.string.is_already_save)}"))
+            addEditTaskEventChannel.send(AddEditTaskEvent.AlreadySaved("${dTitle} ${context.getString(R.string.is_already_save)}"))
         }
     }
 

@@ -14,6 +14,7 @@ import com.example.secondhiltapp.R
 import com.example.secondhiltapp.data.SoccerVideos
 import com.example.secondhiltapp.databinding.ItemUnsplashPhotoBinding
 import com.example.secondhiltapp.utils.convertToCustomFormat
+import com.example.secondhiltapp.utils.setSafeOnClickListener
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.time.Instant
@@ -48,7 +49,7 @@ class SoccerVideoAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         init {
-            binding.imageOnclick.setOnClickListener {
+            binding.imageOnclick.setSafeOnClickListener {
                 val position = bindingAdapterPosition
                 if (position != RecyclerView.NO_POSITION) {
                     val item = getItem(position)
@@ -74,7 +75,7 @@ class SoccerVideoAdapter(
 
                 txtVideoDate.text = convertToCustomFormat(video.date).uppercase()//date.toString()
 
-                saveHighlights.setOnClickListener {
+                saveHighlights.setSafeOnClickListener {
                     onBookmarkClick(video)
                 }
 

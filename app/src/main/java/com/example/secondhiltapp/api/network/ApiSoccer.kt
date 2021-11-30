@@ -1,6 +1,5 @@
 package com.example.secondhiltapp.api.network
 
-import com.example.secondhiltapp.BuildConfig
 import com.example.secondhiltapp.api.response.SoccerNewsResponse
 import com.example.secondhiltapp.api.response.SoccerResponse
 import retrofit2.Response

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <integer-array name="pop_random_">
+        <item>@drawable/banner_daily_rebate</item>
+        <item>@drawable/banner_one_fifty_bonus</item>
+        <item>@drawable/banner_referral_bonus</item>
+        <item>@drawable/banner_slots_daily</item>
+    </integer-array>
+
+</resources>

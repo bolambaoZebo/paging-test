@@ -30,6 +30,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.home_fragment.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
+import java.lang.Exception
 
 @AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.home_fragment),
@@ -61,8 +62,7 @@ class HomeFragment : Fragment(R.layout.home_fragment),
         val homeAdapter = HomeAdapter(
             onItemClick = { soccer, lang ->
                 val tNews = if (lang == LOCAL_ENGLISH) soccer.title!! else soccer.titleChinese!!
-                val tDes =
-                    if (lang == LOCAL_ENGLISH) soccer.description!! else soccer.descriptionChinese!!
+                val tDes = if (lang == LOCAL_ENGLISH) soccer.description!! else soccer.descriptionChinese!!
                 Intent(requireContext(), NewsActivity::class.java).apply {
                     this.putExtra(IMAGE_STRING, soccer.imageUrl)
                     this.putExtra(TITLE_STRING, tNews)
@@ -70,8 +70,8 @@ class HomeFragment : Fragment(R.layout.home_fragment),
                     startActivity(this)
                 }
             },
-            onBookmarkClick = { soccer ->
-                viewModel.onSaveNews(soccer,requireContext())
+            onBookmarkClick = { soccer, lang ->
+                viewModel.onSaveNews(soccer,requireContext(), lang)
             },
             onLikeClick = { soccer ->
                 Toast.makeText(requireContext(), "like", Toast.LENGTH_SHORT).show()
@@ -139,7 +139,7 @@ class HomeFragment : Fragment(R.layout.home_fragment),
             viewModel.onManualRefresh()
         }
 
-        button_retry.setOnClickListener {
+        button_retry.setSafeOnClickListener {
             viewModel.onManualRefresh()
         }
 
@@ -149,7 +149,7 @@ class HomeFragment : Fragment(R.layout.home_fragment),
             }
         }
 
-        scrollUp.setOnClickListener {
+        scrollUp.setSafeOnClickListener {
             homRecyclerView.smoothScrollToPosition(0)
             scrollUp.hide()
         }
@@ -187,11 +187,7 @@ class HomeFragment : Fragment(R.layout.home_fragment),
                     is HomeViewModel.AddEditTaskEvent.AlreadySaved -> {
                         requireActivity().snackBar(event.msg, requireActivity(), false)
                     }
-                    else -> Toast.makeText(
-                        requireContext(),
-                        getString(R.string.something_went_wrong),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    else -> ""
                 }.exhaustive
             }
         }
@@ -245,13 +241,12 @@ class HomeFragment : Fragment(R.layout.home_fragment),
     }
 
     override fun onSaveClick(data: SoccerNews) {
-        viewModel.onSaveNews(data, requireContext())
+//        viewModel.onSaveNews(data, requireContext(), lang)
     }
 
     override fun onSliderImageClicked(imageUrl: String) {
         viewModel.isActive?.observe(viewLifecycleOwner) {
             if (it != null && it.isActive == true) {
-//                Toast.makeText(requireContext(), imageUrl, Toast.LENGTH_SHORT).show()
                 requireContext().goTo3WE()
             } else {
                 requireActivity().snackBar(

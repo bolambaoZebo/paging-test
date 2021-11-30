@@ -8,6 +8,7 @@ import com.example.secondhiltapp.databinding.ItemSoccerNewsBinding
 import com.example.secondhiltapp.db.entity.BookMarkData
 import com.example.secondhiltapp.db.entity.SoccerNews
 import com.example.secondhiltapp.preferences.SortOrder
+import com.example.secondhiltapp.utils.setSafeOnClickListener
 
 class HomeViewHolder(
     private val binding: ItemSoccerNewsBinding,
@@ -23,7 +24,7 @@ class HomeViewHolder(
         binding.apply {
             if (language == "zh") {
                 binding.itemHorseNewsTitle.text = video.titleChinese
-            }else{
+            } else {
                 binding.itemHorseNewsTitle.text = video.title
             }
             Glide.with(itemView)
@@ -45,6 +46,7 @@ class HomeViewHolder(
 
     init {
         binding.apply {
+
             itemHorseNewsImage.setOnClickListener {
                 val position = bindingAdapterPosition
                 if (position != RecyclerView.NO_POSITION) {
@@ -69,8 +71,69 @@ class HomeViewHolder(
                     onCommentClick(position)
                 }
             }
+//            itemHorseNewsImage.setSafeOnClickListener {
+//                it.setOnClickListener {
+//                    val position = bindingAdapterPosition
+//                    if (position != RecyclerView.NO_POSITION) {
+//                        onItemClick(position)
+//                    }
+//                }
+//            }
+//
+//
+//            savePost.setSafeOnClickListener {
+//                it.setOnClickListener {
+//                    val position = bindingAdapterPosition
+//                    if (position != RecyclerView.NO_POSITION) {
+//                        onBookmarkClick(position)
+//                    }
+//                }
+//
+//            }
+//
+//            likePost.setSafeOnClickListener {
+//                it.setOnClickListener {
+//                    val position = bindingAdapterPosition
+//                    if (position != RecyclerView.NO_POSITION) {
+//                        onLikeClick(position)
+//                    }
+//                }
+//            }
+//
+//            commentsPost.setSafeOnClickListener {
+//                it.setOnClickListener {
+//                    val position = bindingAdapterPosition
+//                    if (position != RecyclerView.NO_POSITION) {
+//                        onCommentClick(position)
+//                    }
+//                }
+//            }
 
         }
     }
-
 }
+
+
+//            itemHorseNewsImage.setOnClickListener {
+//                val position = bindingAdapterPosition
+//                if (position != RecyclerView.NO_POSITION) {
+//                    onItemClick(position)
+//                }
+//                savePost.setOnClickListener {
+//                    val position = bindingAdapterPosition
+//                    if (position != RecyclerView.NO_POSITION) {
+//                        onBookmarkClick(position)
+//                    }
+//                }
+//                likePost.setOnClickListener {
+//                    val position = bindingAdapterPosition
+//                    if (position != RecyclerView.NO_POSITION) {
+//                        onLikeClick(position)
+//                    }
+//                }
+//                commentsPost.setOnClickListener {
+//                    val position = bindingAdapterPosition
+//                    if (position != RecyclerView.NO_POSITION) {
+//                        onCommentClick(position)
+//                    }
+//                }

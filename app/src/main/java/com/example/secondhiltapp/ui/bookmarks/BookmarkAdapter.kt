@@ -12,6 +12,7 @@ import com.example.secondhiltapp.databinding.ItemBookmarkBinding
 import com.example.secondhiltapp.db.entity.BookMarkData
 import com.example.secondhiltapp.preferences.SortOrder
 import com.example.secondhiltapp.utils.LOCAL_ENGLISH
+import com.example.secondhiltapp.utils.setSafeOnClickListener
 
 class BookmarkAdapter(
     private val listener: OnItemBookmarkClick
@@ -39,7 +40,7 @@ class BookmarkAdapter(
                     .error(R.drawable.ic_error)
                     .into(bookmarkItemImage)
 
-                rootItemBookmark.setOnClickListener {
+                rootItemBookmark.setSafeOnClickListener {
                     listener.onItemClick(bookmark, language)
                 }
             }

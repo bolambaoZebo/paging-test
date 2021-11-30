@@ -12,7 +12,7 @@ class HomeAdapter (
     private val onItemClick: (SoccerNews, lang: String) -> Unit,
     private val onLikeClick: (SoccerNews) -> Unit,
     private val onCommentClick: (SoccerNews) -> Unit,
-    private val onBookmarkClick: (SoccerNews) -> Unit,
+    private val onBookmarkClick: (SoccerNews, lang: String) -> Unit,
     private val context: Context
 ) : ListAdapter<SoccerNews, HomeViewHolder>(HomeComparator()) {
 
@@ -44,7 +44,7 @@ class HomeAdapter (
             onBookmarkClick = { position ->
                 val article = getItem(position)
                 if (article != null) {
-                    onBookmarkClick(article)
+                    onBookmarkClick(article, language)
                 }
             },
             language
